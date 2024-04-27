@@ -1,0 +1,26 @@
+{
+  "name": "@ordjs/ordinals",
+  "version": "1.0.0",
+  "description": "Bitcoin runes protocol impl in js.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeasonstudio/bitcoin-runes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jeasonstudio/bitcoin-runes/issues"
+  },
+  "homepage": "https://github.com/jeasonstudio/bitcoin-runes#readme",
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "unbuild": "^2.0.0",
+    "vitest": "^1.5.2"
+  },
+  "dependencies": {}
+}
