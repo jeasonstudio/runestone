@@ -1,4 +1,4 @@
-import { Runestone } from '../runestone/runestone.js';
+import { Runestone } from '../runestone/index.js';
 const fromHexString = (hexString) =>
   Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
 

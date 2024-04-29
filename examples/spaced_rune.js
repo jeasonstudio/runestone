@@ -1,4 +1,4 @@
-import { SpacedRune, Rune } from '../runestone/runestone.js';
+import { SpacedRune, Rune } from '../runestone/index.js';
 
 const rune = new Rune(67090369340599840949n);
 const spacedRune = new SpacedRune(rune, 7967);

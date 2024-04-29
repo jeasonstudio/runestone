@@ -1,4 +1,4 @@
-import { RuneId } from '../runestone/runestone.js';
+import { RuneId } from '../runestone/index.js';
 
 const runeId = new RuneId(840000n, 1);
 console.log('runeId:', runeId.toString(), runeId.block, runeId.tx);

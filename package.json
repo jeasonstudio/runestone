@@ -1,31 +1,45 @@
 {
   "name": "@ordjs/runestone",
-  "version": "1.0.0",
-  "description": "Bitcoin runes protocol impl in js.",
+  "version": "1.1.0",
+  "description": "Ordinals runestone javascript implementation",
   "type": "module",
   "scripts": {
+    "prepublishOnly": "npm run build",
     "test": "node --experimental-wasm-modules --no-warnings",
-    "build": "wasm-pack build --scope ordjs --out-dir runestone --target bundler --no-pack"
+    "build:rust": "wasm-pack build --scope ordjs --out-dir runestone --target bundler --no-pack --out-name index",
+    "build": "npm run build:rust && node build.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jeasonstudio/bitcoin-runes.git"
+    "url": "git+https://github.com/jeasonstudio/runestone.git"
   },
   "exports": {
     ".": {
       "import": "./runestone/index.js",
       "types": "./runestone/index.d.ts"
+    },
+    "./bundle": {
+      "import": "./runestone/bundle.js",
+      "types": "./runestone/index.d.ts"
     }
   },
   "keywords": [],
-  "author": "",
+  "files": [
+    "runestone/*.wasm",
+    "runestone/*.js",
+    "runestone/*.d.ts",
+    "examples"
+  ],
+  "author": "jeason.eth <me@cowpoke.cc>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jeasonstudio/bitcoin-runes/issues"
+    "url": "https://github.com/jeasonstudio/runestone/issues"
   },
-  "homepage": "https://github.com/jeasonstudio/bitcoin-runes#readme",
+  "homepage": "https://github.com/jeasonstudio/runestone#readme",
   "devDependencies": {
-    "typescript": "^5.4.5"
-  },
-  "dependencies": {}
+    "esbuild": "^0.20.2",
+    "esbuild-plugin-wasm": "^1.1.0",
+    "typescript": "^5.4.5",
+    "unbuild": "^2.0.0"
+  }
 }
