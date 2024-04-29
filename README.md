@@ -7,12 +7,11 @@
 This implementation is based on ord `0.18.3` (ordinals runestone `0.0.8`)
 
 [![NPM version][npm-image]][npm-url]
-[![NPM downloads][download-image]][download-url]
 [![MIT License][license-shield]][license-url]
+[![Stargazers][stars-shield]][stars-url]
 
 [![Contributors][contributors-shield]][contributors-url]
 [![Issues][issues-shield]][issues-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Follow Twitter][twitter-image]][twitter-url]
 
 [Report Bug](https://github.com/jeasonstudio/runestone/issues/new) · [Pull Request](https://github.com/jeasonstudio/runestone/compare)
@@ -21,8 +20,6 @@ This implementation is based on ord `0.18.3` (ordinals runestone `0.0.8`)
 
 [npm-image]: https://img.shields.io/npm/v/@ordjs/runestone?style=for-the-badge
 [npm-url]: http://npmjs.org/package/@ordjs/runestone
-[download-image]: https://img.shields.io/npm/dm/@ordjs/runestone.svg?style=for-the-badge
-[download-url]: https://npmjs.org/package/@ordjs/runestone
 
 [codecov-image]: https://img.shields.io/codecov/c/github/jeasonstudio/runestone/master.svg?style=for-the-badge
 [codecov-url]: https://codecov.io/gh/jeasonstudio/runestone/branch/master
