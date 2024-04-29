@@ -1,0 +1,8 @@
+import { RuneId } from '../runestone/runestone.js';
+
+const runeId = new RuneId(840000n, 1);
+console.log('runeId:', runeId.toString(), runeId.block, runeId.tx);
+console.log('delta:', runeId.delta(new RuneId(840001n, 10000)).start);
+console.log('next:', runeId.next(1n, 1).toString());
+
+console.log(RuneId.fromString('840000:1').toString());

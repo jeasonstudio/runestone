@@ -40,10 +40,14 @@ impl SpacedRune {
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<SpacedRune, JsValue> {
         let spaced_rune = SpacedRuneOrd::from_str(s).unwrap();
-        Ok(SpacedRune {
-            rune: Rune::new(spaced_rune.rune.0 as u64),
-            spacers: spaced_rune.spacers,
-            source: spaced_rune,
-        })
+        Ok(create_spaced_rune_from_source(spaced_rune))
+    }
+}
+
+pub fn create_spaced_rune_from_source(source: SpacedRuneOrd) -> SpacedRune {
+    SpacedRune {
+        rune: create_rune_from_source(source.rune),
+        spacers: source.spacers,
+        source,
     }
 }

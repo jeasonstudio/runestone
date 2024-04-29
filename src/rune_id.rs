@@ -55,11 +55,15 @@ impl RuneId {
 
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<RuneId, JsValue> {
-        let rune_id = RuneIdOrd::from_str(s).unwrap();
-        Ok(RuneId {
-            block: rune_id.block,
-            tx: rune_id.tx,
-            source: rune_id,
-        })
+        let source = RuneIdOrd::from_str(s).unwrap();
+        Ok(create_rune_id_from_source(source))
+    }
+}
+
+pub fn create_rune_id_from_source(source: RuneIdOrd) -> RuneId {
+    RuneId {
+        block: source.block,
+        tx: source.tx,
+        source,
     }
 }

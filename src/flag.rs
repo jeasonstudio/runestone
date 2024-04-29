@@ -1,11 +1,13 @@
-use ordinals::Runestone::Flag as FlagOrd;
-use serde::{Deserialize, Serialize};
+// use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
-#[derive(Serialize, Deserialize)]
+// #[derive(Serialize, Deserialize, Default, Clone, Copy)]
+// #[wasm_bindgen]
+// pub struct Flag {
+//     pub foo: u128,
+// }
+
 #[wasm_bindgen]
-pub enum Flag {
-    Etching = 0,
-    Terms = 1,
-    Turbo = 2,
+pub fn test() -> u64 {
+    u64::MAX
 }

@@ -1,26 +1,31 @@
 {
-  "name": "@ordjs/ordinals",
+  "name": "@ordjs/runestone",
   "version": "1.0.0",
   "description": "Bitcoin runes protocol impl in js.",
-  "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-wasm-modules --no-warnings",
+    "build": "wasm-pack build --scope ordjs --out-dir runestone --target bundler --no-pack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jeasonstudio/bitcoin-runes.git"
   },
+  "exports": {
+    ".": {
+      "import": "./runestone/index.js",
+      "types": "./runestone/index.d.ts"
+    }
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/jeasonstudio/bitcoin-runes/issues"
   },
   "homepage": "https://github.com/jeasonstudio/bitcoin-runes#readme",
   "devDependencies": {
-    "typescript": "^5.4.5",
-    "unbuild": "^2.0.0",
-    "vitest": "^1.5.2"
+    "typescript": "^5.4.5"
   },
   "dependencies": {}
 }

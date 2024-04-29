@@ -8,6 +8,13 @@ pub struct Range {
     pub end: Option<u64>,
 }
 
+pub fn create_range_from_tuple(t: (Option<u64>, Option<u64>)) -> Range {
+    Range {
+        start: t.0,
+        end: t.1,
+    }
+}
+
 #[wasm_bindgen(typescript_custom_section)]
 const Network: &'static str = r#"
 export type Network = "main" | "test" | "signet" | "regtest";
