@@ -23,7 +23,12 @@
       "types": "./runestone/index.d.ts"
     }
   },
-  "keywords": [],
+  "keywords": [
+    "bitcoin",
+    "ordinals",
+    "runestone",
+    "sdk"
+  ],
   "files": [
     "runestone/*.wasm",
     "runestone/*.js",
@@ -39,7 +44,6 @@
   "devDependencies": {
     "esbuild": "^0.20.2",
     "esbuild-plugin-wasm": "^1.1.0",
-    "typescript": "^5.4.5",
-    "unbuild": "^2.0.0"
+    "typescript": "^5.4.5"
   }
 }
