@@ -10,9 +10,21 @@ const tx = {
   output: [
     {
       script_pubkey: fromHexString(
-        '6a5d21020704b5e1d8e1c8eeb788a30705a02d039f3e01020680dc9afd2808c7e8430a64'
+        '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601'
       ),
       value: 0,
+    },
+    {
+      script_pubkey: fromHexString(
+        '5120f74ffbe050dae50a5564d8c9ff57e5bc2fc931225402e4fa751bb21c7da53560'
+      ),
+      value: 546,
+    },
+    {
+      script_pubkey: fromHexString(
+        '0014e08b4212e2a63e1cce78e1ccfbe326a0b8380968'
+      ),
+      value: 2158,
     },
   ],
   input: [],

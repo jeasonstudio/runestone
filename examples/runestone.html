@@ -7,9 +7,38 @@
   </head>
   <body>
     <script type="module">
-      import { Rune } from 'https://esm.sh/@ordjs/runestone@latest/bundle';
-      const rune = new Rune(1n);
-      console.log(rune.toString());
+      import { Runestone } from 'https://esm.sh/@ordjs/runestone@latest/bundle';
+
+      const fromHexString = (hexString) =>
+        Uint8Array.from(
+          hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16))
+        );
+
+      const tx = {
+        output: [
+          {
+            script_pubkey: fromHexString(
+              '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601'
+            ),
+            value: 0,
+          },
+          {
+            script_pubkey: fromHexString(
+              '5120f74ffbe050dae50a5564d8c9ff57e5bc2fc931225402e4fa751bb21c7da53560'
+            ),
+            value: 546,
+          },
+          {
+            script_pubkey: fromHexString(
+              '0014e08b4212e2a63e1cce78e1ccfbe326a0b8380968'
+            ),
+            value: 2158,
+          },
+        ],
+        input: [],
+      };
+      const runestone = Runestone.decipher(tx);
+      console.log(runestone);
     </script>
   </body>
 </html>
