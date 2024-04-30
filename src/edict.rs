@@ -1,5 +1,4 @@
 use super::rune_id::*;
-use ordinals::Edict as EdictOrd;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -15,7 +14,7 @@ pub struct Edict {
     pub output: u32,
 
     #[wasm_bindgen(skip)]
-    pub source: EdictOrd,
+    pub source: ordinals::Edict,
 }
 
 #[wasm_bindgen]
@@ -23,7 +22,7 @@ impl Edict {
     #[wasm_bindgen(constructor)]
     pub fn new(id: RuneId, amount: js_sys::BigInt, output: u32) -> Edict {
         let amount: u128 = amount.try_into().unwrap();
-        let source = EdictOrd {
+        let source = ordinals::Edict {
             id: id.source,
             amount,
             output,
@@ -42,7 +41,7 @@ impl Edict {
     }
 }
 
-pub fn create_edict_from_source(source: EdictOrd) -> Edict {
+pub fn create_edict_from_source(source: ordinals::Edict) -> Edict {
     Edict {
         id: create_rune_id_from_source(source.id),
         output: source.output,

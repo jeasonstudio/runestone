@@ -1,5 +1,4 @@
 use super::types::*;
-use ordinals::RuneId as RuneIdOrd;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use wasm_bindgen::prelude::*;
@@ -14,20 +13,20 @@ pub struct RuneId {
     pub tx: u32,
 
     #[wasm_bindgen(skip)]
-    pub source: RuneIdOrd,
+    pub source: ordinals::RuneId,
 }
 
 #[wasm_bindgen]
 impl RuneId {
     #[wasm_bindgen(constructor)]
     pub fn new(block: u64, tx: u32) -> RuneId {
-        let source = RuneIdOrd { block, tx };
+        let source = ordinals::RuneId { block, tx };
         RuneId { block, tx, source }
     }
 
     #[wasm_bindgen]
     pub fn delta(&self, next: RuneId) -> Range {
-        let next_rune_id = RuneIdOrd {
+        let next_rune_id = ordinals::RuneId {
             block: next.block,
             tx: next.tx,
         };
@@ -55,12 +54,12 @@ impl RuneId {
 
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<RuneId, JsValue> {
-        let source = RuneIdOrd::from_str(s).unwrap();
+        let source = ordinals::RuneId::from_str(s).unwrap();
         Ok(create_rune_id_from_source(source))
     }
 }
 
-pub fn create_rune_id_from_source(source: RuneIdOrd) -> RuneId {
+pub fn create_rune_id_from_source(source: ordinals::RuneId) -> RuneId {
     RuneId {
         block: source.block,
         tx: source.tx,

@@ -1,15 +1,24 @@
 import { Runestone } from '../runestone/index.js';
+
 const fromHexString = (hexString) =>
   Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
 
 const toHexString = (bytes) =>
   bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 
-const runestone = Runestone.decipher(
-  fromHexString(
-    '6a5d21020704b5e1d8e1c8eeb788a30705a02d039f3e01020680dc9afd2808c7e8430a64'
-  )
-);
+const tx = {
+  output: [
+    {
+      script_pubkey: fromHexString(
+        '6a5d21020704b5e1d8e1c8eeb788a30705a02d039f3e01020680dc9afd2808c7e8430a64'
+      ),
+      value: 0,
+    },
+  ],
+  input: [],
+};
+
+const runestone = Runestone.decipher(tx);
 
 console.log('edicts:', runestone.edicts);
 const etching = runestone.etching;

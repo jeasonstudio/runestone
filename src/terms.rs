@@ -1,5 +1,4 @@
 use super::types::*;
-use ordinals::Terms as TermsOrd;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -16,7 +15,7 @@ pub struct Terms {
     pub offset: Range,
 
     #[wasm_bindgen(skip)]
-    pub source: TermsOrd,
+    pub source: ordinals::Terms,
 }
 
 #[wasm_bindgen]
@@ -43,7 +42,7 @@ impl Terms {
     }
 }
 
-pub fn create_terms_from_source(source: TermsOrd) -> Terms {
+pub fn create_terms_from_source(source: ordinals::Terms) -> Terms {
     let height = create_range_from_tuple(source.height);
     let offset = create_range_from_tuple(source.offset);
     Terms {

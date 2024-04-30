@@ -1,16 +1,13 @@
 use super::edict::*;
 use super::etching::*;
 use super::rune_id::*;
-use bitcoin::absolute::LockTime;
-use bitcoin::ScriptBuf;
-use bitcoin::Transaction;
-use bitcoin::TxOut;
-use ordinals::{Artifact, Runestone as RunestoneOrd};
+use super::transaction::tx::Transaction;
 use serde::{Deserialize, Serialize};
+use tsify::Tsify;
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::throw_str;
 
-#[derive(Default, Deserialize, Serialize)]
+#[derive(Default, Deserialize, Serialize, Tsify)]
 #[wasm_bindgen]
 pub struct Runestone {
     edicts: Vec<Edict>,
@@ -25,7 +22,7 @@ pub struct Runestone {
     pub pointer: Option<u32>,
 
     #[wasm_bindgen(skip)]
-    pub source: RunestoneOrd,
+    pub source: ordinals::Runestone,
 }
 
 #[wasm_bindgen]
@@ -40,7 +37,7 @@ impl Runestone {
         let edicts_source = edicts.iter().map(|&edict| edict.source).collect();
         let rune_id = mint.unwrap();
         let etching_source = etching.unwrap();
-        let source = RunestoneOrd {
+        let source = ordinals::Runestone {
             edicts: edicts_source,
             etching: Some(etching_source.source),
             mint: Some(rune_id.source),
@@ -71,24 +68,19 @@ impl Runestone {
     }
 
     #[wasm_bindgen]
-    pub fn decipher(script_pubkey: js_sys::Uint8Array) -> Runestone {
-        let script_pubkey = ScriptBuf::from(script_pubkey.to_vec());
-        let transaction = Transaction {
-            input: Vec::new(),
-            output: vec![TxOut {
-                script_pubkey,
-                value: 0,
-            }],
-            lock_time: LockTime::ZERO,
-            version: 2,
+    pub fn decipher(tx: JsValue) -> Runestone {
+        let transaction: Transaction = match serde_wasm_bindgen::from_value(tx) {
+            Ok(transaction) => transaction,
+            Err(_) => throw_str("Cenotaph: cannot parse transaction from JS value."),
         };
-        let artifact = RunestoneOrd::decipher(&transaction).unwrap();
+        let bitcoin_tx = transaction.to_source();
+        let artifact = ordinals::Runestone::decipher(&bitcoin_tx).unwrap();
         match artifact {
-            Artifact::Cenotaph(cenotaph) => {
+            ordinals::Artifact::Cenotaph(cenotaph) => {
                 let flaw = cenotaph.flaw.unwrap();
                 throw_str(&format!("Cenotaph: {flaw}"));
             }
-            Artifact::Runestone(runestone) => {
+            ordinals::Artifact::Runestone(runestone) => {
                 let edicts = runestone
                     .edicts
                     .iter()

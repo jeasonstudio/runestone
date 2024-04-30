@@ -1,6 +1,5 @@
 use super::rune::*;
 use super::terms::*;
-use ordinals::Etching as EtchingOrd;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -28,7 +27,7 @@ pub struct Etching {
     pub turbo: bool,
 
     #[wasm_bindgen(skip)]
-    pub source: EtchingOrd,
+    pub source: ordinals::Etching,
 }
 
 #[wasm_bindgen]
@@ -53,7 +52,7 @@ impl Etching {
     }
 }
 
-pub fn create_etching_from_source(source: EtchingOrd) -> Etching {
+pub fn create_etching_from_source(source: ordinals::Etching) -> Etching {
     let divisibility = match source.divisibility {
         Some(divisibility) => Some(divisibility),
         None => None,
