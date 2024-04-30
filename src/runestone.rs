@@ -1,15 +1,11 @@
-use std::fmt::Debug;
-use std::fmt::Formatter;
-
 use super::edict::*;
 use super::etching::*;
-use super::rune::*;
 use super::rune_id::*;
 use bitcoin::absolute::LockTime;
 use bitcoin::ScriptBuf;
 use bitcoin::Transaction;
 use bitcoin::TxOut;
-use ordinals::{Artifact, Flaw, Runestone as RunestoneOrd};
+use ordinals::{Artifact, Runestone as RunestoneOrd};
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::throw_str;

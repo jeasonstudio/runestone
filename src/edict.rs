@@ -1,5 +1,3 @@
-use crate::rune_id::create_rune_id_from_source;
-
 use super::rune_id::*;
 use ordinals::Edict as EdictOrd;
 use serde::{Deserialize, Serialize};
@@ -30,7 +28,12 @@ impl Edict {
             amount,
             output,
         };
-        Edict { id, output, amount, source }
+        Edict {
+            id,
+            output,
+            amount,
+            source,
+        }
     }
 
     #[wasm_bindgen(getter)]

@@ -3,7 +3,7 @@ import { wasmLoader } from 'esbuild-plugin-wasm';
 
 await esbuild.build({
   bundle: true,
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['runestone/index.js'],
   format: 'esm',
   platform: 'browser',
   outfile: 'runestone/bundle.js',
