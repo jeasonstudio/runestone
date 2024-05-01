@@ -21,33 +21,48 @@ const tx = {
       value: 0,
     },
   ],
-  input: [],
+  // input: [],
 };
 
 const runestone = Runestone.decipher(tx);
 
-console.log('runestone:', JSON.stringify(runestone, null, 2));
-// console.log('edicts:', runestone.edicts);
-// const etching = runestone.etching;
-// if (etching) {
-//   console.log('divisibility:', etching.divisibility);
-//   console.log('premine:', etching.premine);
-//   console.log('rune:', etching.rune.value);
-//   console.log('spacers:', etching.spacers);
-//   console.log('symbol:', etching.symbol);
-//   console.log('turbo:', etching.turbo);
-//   console.log('terms.amount:', etching.terms?.amount);
-//   console.log('terms.cap:', etching.terms?.cap);
-//   console.log(
-//     'terms.height:',
-//     `(${etching.terms?.height?.start}, ${etching.terms?.height?.end})`
-//   );
-//   console.log(
-//     'terms.offset:',
-//     `(${etching.terms?.offset?.start}, ${etching.terms?.offset?.end})`
-//   );
-// }
-// console.log('mint:', runestone.mint?.toString());
-// console.log('pointer:', runestone.pointer);
-
+console.log('runestone etching:', JSON.stringify(runestone, null, 2));
 console.log(toHexString(runestone.encipher()));
+
+console.log(
+  'runestone mint:',
+  JSON.stringify(
+    Runestone.decipher({
+      output: [
+        {
+          script_pubkey: fromHexString(
+            '51206da59bfd6b08756375d62e8e38e55db6edaaf20a12b3e6e7f3aa36afcfc3c931'
+          ),
+          value: 0,
+        },
+        {
+          script_pubkey: fromHexString('6a5d0914f8a83314f0031600'),
+          value: 0,
+        },
+      ],
+    }),
+    null,
+    2
+  )
+);
+
+console.log(
+  'runestone edicts:',
+  JSON.stringify(
+    Runestone.decipher({
+      output: [
+        {
+          script_pubkey: fromHexString('6a5d0800c0a23301d00f00'),
+          value: 0,
+        },
+      ],
+    }),
+    null,
+    2
+  )
+);

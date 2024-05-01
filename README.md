@@ -67,19 +67,37 @@ const tx = {
   }],
 };
 const runestone = Runestone.decipher(tx);
-
-console.log('edicts:', runestone.edicts); // []
-const etching = runestone.etching;
-if (etching) {
-  console.log('divisibility:', etching.divisibility); // 2
-  console.log('premine:', etching.premine); // 11000000000n
-  console.log('rune:', etching.rune.value); // 67090369340599840949n
-  console.log('spacers:', etching.spacers); // 7967
-  console.log('symbol:', etching.symbol); // ᚠ
-  console.log('turbo:', etching.turbo); // true
-  console.log('terms.amount:', etching.terms?.amount); // 100n
-  console.log('terms.cap:', etching.terms?.cap); // 1111111n
+console.log(JSON.stringify(runestone.toString()));
+/*
+{
+  "edicts": [],
+  "etching": {
+    "divisibility": 2,
+    "premine": 11000000000,
+    "rune": {
+      "value": 67090369340599845000
+    },
+    "spacers": 7967,
+    "symbol": "ᚠ",
+    "terms": {
+      "amount": 100,
+      "cap": 1111111,
+      "height": {
+        "start": null,
+        "end": null
+      },
+      "offset": {
+        "start": null,
+        "end": null
+      }
+    },
+    "turbo": true
+  },
+  "mint": null,
+  "pointer": null
 }
+*/
+
 
 // encipher
 console.log(toHexString(runestone.encipher()));

@@ -35,17 +35,23 @@ impl Runestone {
         etching: Option<Etching>,
         mint: Option<RuneId>,
         pointer: Option<u32>,
-    ) -> Runestone {
+    ) -> Self {
         let edicts_source = edicts.iter().map(|&edict| edict.source).collect();
-        let rune_id = mint.unwrap();
-        let etching_source = etching.unwrap();
+        let etching_source = match etching {
+            Some(etching) => Some(etching.source),
+            None => None,
+        };
+        let mint_source = match mint {
+            Some(mint) => Some(mint.source),
+            None => None,
+        };
         let source = ordinals::Runestone {
             edicts: edicts_source,
-            etching: Some(etching_source.source),
-            mint: Some(rune_id.source),
+            etching: etching_source,
+            mint: mint_source,
             pointer,
         };
-        Runestone {
+        Self {
             edicts,
             etching,
             mint,
@@ -70,7 +76,7 @@ impl Runestone {
     }
 
     #[wasm_bindgen]
-    pub fn decipher(tx: JsValue) -> Runestone {
+    pub fn decipher(tx: JsValue) -> Self {
         let transaction: Transaction = match serde_wasm_bindgen::from_value(tx) {
             Ok(transaction) => transaction,
             Err(_) => throw_str("Cenotaph: cannot parse transaction from JS value."),

@@ -17,7 +17,7 @@ pub struct Transaction {
     pub lock_time: Option<u32>, // bitcoin::absolute::LockTime
 
     /// List of transaction inputs.
-    pub input: Vec<TxInput>,
+    pub input: Option<Vec<TxInput>>,
     /// List of transaction outputs.
     pub output: Vec<TxOutput>,
 }
@@ -35,11 +35,10 @@ impl Transaction {
             },
             None => bitcoin::absolute::LockTime::ZERO,
         };
-        let input = self
-            .input
-            .iter()
-            .map(|tx_input| tx_input.to_source())
-            .collect();
+        let input = match &self.input {
+            Some(input) => input.iter().map(|tx_input| tx_input.to_source()).collect(),
+            None => vec![],
+        };
 
         let output = self
             .output
