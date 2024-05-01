@@ -7,7 +7,9 @@
     "prepublishOnly": "npm run build",
     "test": "node --experimental-wasm-modules --no-warnings",
     "build:rust": "wasm-pack build --scope ordjs --out-dir runestone --target bundler --no-pack --out-name index",
-    "build": "npm run build:rust && node build.js"
+    "build:bundle": "node build.js",
+    "build:doc": "typedoc --plugin typedoc-plugin-markdown --out documents runestone/index.d.ts",
+    "build": "npm run build:rust && pnpm run build:bundle && pnpm run build:doc"
   },
   "repository": {
     "type": "git",
@@ -33,7 +35,8 @@
     "runestone/*.wasm",
     "runestone/*.js",
     "runestone/*.d.ts",
-    "examples"
+    "examples",
+    "documents"
   ],
   "author": "jeason.eth <me@cowpoke.cc>",
   "license": "MIT",
@@ -44,6 +47,8 @@
   "devDependencies": {
     "esbuild": "^0.20.2",
     "esbuild-plugin-wasm": "^1.1.0",
+    "typedoc": "^0.25.13",
+    "typedoc-plugin-markdown": "^3.17.1",
     "typescript": "^5.4.5"
   }
 }
