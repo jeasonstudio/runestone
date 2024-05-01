@@ -2,6 +2,7 @@ use super::edict::*;
 use super::etching::*;
 use super::rune_id::*;
 use super::transaction::tx::Transaction;
+use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use tsify::Tsify;
 use wasm_bindgen::prelude::*;
@@ -22,6 +23,7 @@ pub struct Runestone {
     pub pointer: Option<u32>,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::Runestone,
 }
 
@@ -84,16 +86,16 @@ impl Runestone {
                 let edicts = runestone
                     .edicts
                     .iter()
-                    .map(|&edict| create_edict_from_source(edict))
+                    .map(|&edict| Edict::from(edict))
                     .collect();
 
                 let etching = match runestone.etching {
-                    Some(etching) => Some(create_etching_from_source(etching)),
+                    Some(etching) => Some(Etching::from(etching)),
                     None => None,
                 };
 
                 let mint = match runestone.mint {
-                    Some(mint) => Some(create_rune_id_from_source(mint)),
+                    Some(mint) => Some(RuneId::from(mint)),
                     None => None,
                 };
 
@@ -111,5 +113,15 @@ impl Runestone {
                 }
             }
         }
+    }
+
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
+    }
+
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
     }
 }

@@ -2,6 +2,7 @@ use super::types::*;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use wasm_bindgen::prelude::*;
+use gloo_utils::format::JsValueSerdeExt;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
 #[wasm_bindgen]
@@ -13,37 +14,40 @@ pub struct RuneId {
     pub tx: u32,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::RuneId,
 }
 
 #[wasm_bindgen]
 impl RuneId {
     #[wasm_bindgen(constructor)]
-    pub fn new(block: u64, tx: u32) -> RuneId {
+    pub fn new(block: u64, tx: u32) -> Self {
         let source = ordinals::RuneId { block, tx };
-        RuneId { block, tx, source }
+        Self { block, tx, source }
     }
 
     #[wasm_bindgen]
-    pub fn delta(&self, next: RuneId) -> Range {
+    pub fn delta(&self, next: Self) -> Option<Range> {
         let next_rune_id = ordinals::RuneId {
             block: next.block,
             tx: next.tx,
         };
-        let (start, end) = self.source.delta(next_rune_id).unwrap_throw();
-        Range {
-            start: Some(start as u64),
-            end: Some(end as u64),
+        let tuple = self.source.delta(next_rune_id);
+        match tuple {
+            Some((start, end)) => Some(Range {
+                start: Some(start as u64),
+                end: Some(end as u64),
+            }),
+            None => None,
         }
     }
 
     #[wasm_bindgen]
-    pub fn next(&self, block: u64, tx: u32) -> RuneId {
-        let next_rune_id = self.source.next(block as u128, tx as u128).unwrap_throw();
-        RuneId {
-            block: next_rune_id.block,
-            tx: next_rune_id.tx,
-            source: next_rune_id,
+    pub fn next(&self, block: u64, tx: u32) -> Option<RuneId> {
+        let next_rune_id = self.source.next(block as u128, tx as u128);
+        match next_rune_id {
+            Some(value) => Some(Self::from(value)),
+            None => None,
         }
     }
 
@@ -52,17 +56,24 @@ impl RuneId {
         self.source.to_string()
     }
 
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
+    }
+
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<RuneId, JsValue> {
         let source = ordinals::RuneId::from_str(s).unwrap();
-        Ok(create_rune_id_from_source(source))
+        Ok(Self::from(source))
     }
 }
 
-pub fn create_rune_id_from_source(source: ordinals::RuneId) -> RuneId {
-    RuneId {
-        block: source.block,
-        tx: source.tx,
-        source,
+impl From<ordinals::RuneId> for RuneId {
+    fn from(source: ordinals::RuneId) -> Self {
+        Self {
+            block: source.block,
+            tx: source.tx,
+            source,
+        }
     }
 }

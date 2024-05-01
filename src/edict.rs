@@ -1,4 +1,5 @@
 use super::rune_id::*;
+use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -14,20 +15,21 @@ pub struct Edict {
     pub output: u32,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::Edict,
 }
 
 #[wasm_bindgen]
 impl Edict {
     #[wasm_bindgen(constructor)]
-    pub fn new(id: RuneId, amount: js_sys::BigInt, output: u32) -> Edict {
+    pub fn new(id: RuneId, amount: js_sys::BigInt, output: u32) -> Self {
         let amount: u128 = amount.try_into().unwrap();
         let source = ordinals::Edict {
             id: id.source,
             amount,
             output,
         };
-        Edict {
+        Self {
             id,
             output,
             amount,
@@ -39,13 +41,20 @@ impl Edict {
     pub fn amount(&self) -> js_sys::BigInt {
         js_sys::BigInt::from(self.source.amount)
     }
+
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
+    }
 }
 
-pub fn create_edict_from_source(source: ordinals::Edict) -> Edict {
-    Edict {
-        id: create_rune_id_from_source(source.id),
-        output: source.output,
-        amount: source.amount,
-        source,
+impl From<ordinals::Edict> for Edict {
+    fn from(source: ordinals::Edict) -> Self {
+        Self {
+            id: RuneId::from(source.id),
+            output: source.output,
+            amount: source.amount,
+            source,
+        }
     }
 }

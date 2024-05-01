@@ -10,21 +10,15 @@ const tx = {
   output: [
     {
       script_pubkey: fromHexString(
-        '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601'
+        '51203b8b3ab1453eb47e2d4903b963776680e30863df3625d3e74292338ae7928da1'
+      ),
+      value: 1797928002,
+    },
+    {
+      script_pubkey: fromHexString(
+        '6a5d21020704b5e1d8e1c8eeb788a30705a02d039f3e01020680dc9afd2808c7e8430a64'
       ),
       value: 0,
-    },
-    {
-      script_pubkey: fromHexString(
-        '5120f74ffbe050dae50a5564d8c9ff57e5bc2fc931225402e4fa751bb21c7da53560'
-      ),
-      value: 546,
-    },
-    {
-      script_pubkey: fromHexString(
-        '0014e08b4212e2a63e1cce78e1ccfbe326a0b8380968'
-      ),
-      value: 2158,
     },
   ],
   input: [],
@@ -32,27 +26,28 @@ const tx = {
 
 const runestone = Runestone.decipher(tx);
 
-console.log('edicts:', runestone.edicts);
-const etching = runestone.etching;
-if (etching) {
-  console.log('divisibility:', etching.divisibility);
-  console.log('premine:', etching.premine);
-  console.log('rune:', etching.rune.value);
-  console.log('spacers:', etching.spacers);
-  console.log('symbol:', etching.symbol);
-  console.log('turbo:', etching.turbo);
-  console.log('terms.amount:', etching.terms?.amount);
-  console.log('terms.cap:', etching.terms?.cap);
-  console.log(
-    'terms.height:',
-    `(${etching.terms?.height?.start}, ${etching.terms?.height?.end})`
-  );
-  console.log(
-    'terms.offset:',
-    `(${etching.terms?.offset?.start}, ${etching.terms?.offset?.end})`
-  );
-}
-console.log('mint:', runestone.mint?.toString());
-console.log('pointer:', runestone.pointer);
+console.log('runestone:', JSON.stringify(runestone, null, 2));
+// console.log('edicts:', runestone.edicts);
+// const etching = runestone.etching;
+// if (etching) {
+//   console.log('divisibility:', etching.divisibility);
+//   console.log('premine:', etching.premine);
+//   console.log('rune:', etching.rune.value);
+//   console.log('spacers:', etching.spacers);
+//   console.log('symbol:', etching.symbol);
+//   console.log('turbo:', etching.turbo);
+//   console.log('terms.amount:', etching.terms?.amount);
+//   console.log('terms.cap:', etching.terms?.cap);
+//   console.log(
+//     'terms.height:',
+//     `(${etching.terms?.height?.start}, ${etching.terms?.height?.end})`
+//   );
+//   console.log(
+//     'terms.offset:',
+//     `(${etching.terms?.offset?.start}, ${etching.terms?.offset?.end})`
+//   );
+// }
+// console.log('mint:', runestone.mint?.toString());
+// console.log('pointer:', runestone.pointer);
 
 console.log(toHexString(runestone.encipher()));

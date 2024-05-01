@@ -1,4 +1,5 @@
 use super::types::*;
+use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -15,6 +16,7 @@ pub struct Terms {
     pub offset: Range,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::Terms,
 }
 
@@ -40,16 +42,23 @@ impl Terms {
             None => None,
         }
     }
+
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
+    }
 }
 
-pub fn create_terms_from_source(source: ordinals::Terms) -> Terms {
-    let height = create_range_from_tuple(source.height);
-    let offset = create_range_from_tuple(source.offset);
-    Terms {
-        amount: source.amount,
-        cap: source.cap,
-        height,
-        offset,
-        source,
+impl From<ordinals::Terms> for Terms {
+    fn from(source: ordinals::Terms) -> Self {
+        let height = create_range_from_tuple(source.height);
+        let offset = create_range_from_tuple(source.offset);
+        Self {
+            amount: source.amount,
+            cap: source.cap,
+            height,
+            offset,
+            source,
+        }
     }
 }

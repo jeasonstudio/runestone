@@ -1,4 +1,5 @@
 use super::types::*;
+use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use std::str::FromStr;
 use wasm_bindgen::prelude::*;
@@ -9,6 +10,7 @@ pub struct Rune {
     value: u128,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::Rune,
 }
 
@@ -49,6 +51,11 @@ impl Rune {
         self.source.0.into()
     }
 
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
+    }
+
     // static
     #[wasm_bindgen(js_name = "firstRuneHeight")]
     pub fn first_rune_height(network: Network) -> u32 {
@@ -61,26 +68,29 @@ impl Rune {
     pub fn minimum_at_height(network: Network, height: u32) -> Self {
         let network: bitcoin::Network =
             bitcoin::Network::from_core_arg(&network.as_string().unwrap()).unwrap();
-        let source: ordinals::Rune = ordinals::Rune::minimum_at_height(network, ordinals::Height(height));
-        create_rune_from_source(source)
+        let source: ordinals::Rune =
+            ordinals::Rune::minimum_at_height(network, ordinals::Height(height));
+        Self::from(source)
     }
 
     #[wasm_bindgen]
     pub fn reserved(block: u64, tx: u32) -> Self {
         let source: ordinals::Rune = ordinals::Rune::reserved(block, tx);
-        create_rune_from_source(source)
+        Self::from(source)
     }
 
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<Rune, JsValue> {
         let source: ordinals::Rune = ordinals::Rune::from_str(s).unwrap();
-        Ok(create_rune_from_source(source))
+        Ok(Self::from(source))
     }
 }
 
-pub fn create_rune_from_source(source: ordinals::Rune) -> Rune {
-    Rune {
-        source,
-        value: source.0,
+impl From<ordinals::Rune> for Rune {
+    fn from(source: ordinals::Rune) -> Self {
+        Self {
+            source,
+            value: source.0,
+        }
     }
 }

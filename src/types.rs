@@ -25,3 +25,4 @@ extern "C" {
     #[wasm_bindgen(typescript_type = "Network")]
     pub type Network;
 }
+

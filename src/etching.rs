@@ -1,5 +1,6 @@
 use super::rune::*;
 use super::terms::*;
+use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
@@ -27,6 +28,7 @@ pub struct Etching {
     pub turbo: bool,
 
     #[wasm_bindgen(skip)]
+    #[serde(skip)]
     pub source: ordinals::Etching,
 }
 
@@ -47,44 +49,53 @@ impl Etching {
 
     #[wasm_bindgen]
     pub fn supply(&self) -> Option<u64> {
-        let value = self.source.supply().unwrap();
-        Some(value as u64)
+        match self.source.supply() {
+            Some(value) => Some(value as u64),
+            None => None,
+        }
+    }
+
+    #[wasm_bindgen(js_name = "toJSON")]
+    pub fn to_json_value(&self) -> JsValue {
+        JsValue::from_serde(&self).unwrap()
     }
 }
 
-pub fn create_etching_from_source(source: ordinals::Etching) -> Etching {
-    let divisibility = match source.divisibility {
-        Some(divisibility) => Some(divisibility),
-        None => None,
-    };
-    let premine = match source.premine {
-        Some(premine) => Some(premine),
-        None => None,
-    };
-    let rune = match source.rune {
-        Some(rune) => Some(create_rune_from_source(rune)),
-        None => None,
-    };
-    let spacers = match source.spacers {
-        Some(spacers) => Some(spacers),
-        None => None,
-    };
-    let symbol = match source.symbol {
-        Some(symbol) => Some(symbol),
-        None => None,
-    };
-    let terms = match source.terms {
-        Some(terms) => Some(create_terms_from_source(terms)),
-        None => None,
-    };
-    Etching {
-        divisibility,
-        premine,
-        rune,
-        spacers,
-        symbol,
-        terms,
-        turbo: source.turbo,
-        source,
+impl From<ordinals::Etching> for Etching {
+    fn from(source: ordinals::Etching) -> Self {
+        let divisibility = match source.divisibility {
+            Some(divisibility) => Some(divisibility),
+            None => None,
+        };
+        let premine = match source.premine {
+            Some(premine) => Some(premine),
+            None => None,
+        };
+        let rune = match source.rune {
+            Some(rune) => Some(Rune::from(rune)),
+            None => None,
+        };
+        let spacers = match source.spacers {
+            Some(spacers) => Some(spacers),
+            None => None,
+        };
+        let symbol = match source.symbol {
+            Some(symbol) => Some(symbol),
+            None => None,
+        };
+        let terms = match source.terms {
+            Some(terms) => Some(Terms::from(terms)),
+            None => None,
+        };
+        Self {
+            divisibility,
+            premine,
+            rune,
+            spacers,
+            symbol,
+            terms,
+            turbo: source.turbo,
+            source,
+        }
     }
 }

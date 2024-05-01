@@ -15,4 +15,5 @@ serde-wasm-bindgen = "0.6.5"
 bitcoin = "0.30.2"
 js-sys = "0.3.69"
 tsify = "0.4.5"
-
+serde_json = "1.0.116"
+gloo-utils = { version = "0.2", features = ["serde"] }
