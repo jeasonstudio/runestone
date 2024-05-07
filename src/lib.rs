@@ -7,3 +7,4 @@ pub mod spaced_rune;
 pub mod terms;
 pub mod transaction;
 pub mod types;
+pub mod utils;

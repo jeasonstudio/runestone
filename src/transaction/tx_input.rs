@@ -1,3 +1,4 @@
+use crate::utils::*;
 use bitcoin::hashes::Hash;
 use serde::{Deserialize, Serialize};
 use tsify::Tsify;
@@ -6,14 +7,15 @@ use tsify::Tsify;
 #[tsify(into_wasm_abi, from_wasm_abi)]
 pub struct OutPoint {
     /// The referenced transaction's txid.
-    pub txid: Vec<u8>,
+    pub txid: String,
     /// The index of the referenced output in its transaction's vout.
     pub vout: u32,
 }
 
 impl OutPoint {
     pub fn to_source(&self) -> bitcoin::OutPoint {
-        let hash = match bitcoin::hashes::sha256d::Hash::from_slice(&self.txid) {
+        let txid = decode_hex_to_bytes(self.txid.to_owned());
+        let hash = match bitcoin::hashes::sha256d::Hash::from_slice(&txid) {
             Ok(hash) => hash,
             Err(_) => bitcoin::hashes::sha256d::Hash::from_byte_array([0; 32]),
         };
@@ -30,7 +32,7 @@ impl OutPoint {
 pub struct Witness {
     /// Contains the witness `Vec<Vec<u8>>` serialization without the initial varint indicating the
     /// number of elements (which is stored in `witness_elements`).
-    pub content: Vec<u8>,
+    pub content: String,
 
     /// The number of elements in the witness.
     ///
@@ -50,7 +52,7 @@ pub struct TxInput {
     pub previous_output: OutPoint,
     /// The script which pushes values on the stack which will cause
     /// the referenced output's script to be accepted.
-    pub script_sig: Vec<u8>,
+    pub script_sig: String,
     /// The sequence number, which suggests to miners which of two
     /// conflicting transactions should be preferred, or 0xFFFFFFFF
     /// to ignore this feature. This is generally never used since
@@ -67,7 +69,9 @@ pub struct TxInput {
 impl TxInput {
     pub fn to_source(&self) -> bitcoin::TxIn {
         let previous_output = self.previous_output.to_source();
-        let script_sig = bitcoin::ScriptBuf::from_bytes(self.script_sig.to_vec());
+        let script_sig = bitcoin::ScriptBuf::from_bytes(
+            decode_hex_to_bytes(self.script_sig.to_owned()).to_vec(),
+        );
         let sequence = bitcoin::Sequence::from_consensus(self.sequence);
         let witness = bitcoin::Witness::new(); // TODO: ignored
         bitcoin::TxIn {

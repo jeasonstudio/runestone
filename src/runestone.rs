@@ -2,6 +2,7 @@ use super::edict::*;
 use super::etching::*;
 use super::rune_id::*;
 use super::transaction::tx::Transaction;
+use super::utils::*;
 use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
 use tsify::Tsify;
@@ -69,10 +70,36 @@ impl Runestone {
         result
     }
 
+    #[wasm_bindgen(js_name = "edicts", setter)]
+    pub fn set_edicts(&mut self, values: Vec<Edict>) {
+        let edicts_source = values.iter().map(|&edict| edict.source).collect();
+        self.source.edicts = edicts_source;
+        self.edicts = values;
+    }
+
+    #[wasm_bindgen(js_name = "etching", setter)]
+    pub fn set_etching(&mut self, values: Etching) {
+        self.source.etching = Some(values.source);
+        self.etching = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "mint", setter)]
+    pub fn set_mint(&mut self, values: RuneId) {
+        self.source.mint = Some(values.source);
+        self.mint = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "pointer", setter)]
+    pub fn set_pointer(&mut self, values: u32) {
+        self.source.pointer = Some(values);
+        self.pointer = Some(values);
+    }
+
     #[wasm_bindgen]
-    pub fn encipher(&self) -> js_sys::Uint8Array {
+    pub fn encipher(&self) -> String {
         let script_buf = self.source.encipher();
-        js_sys::Uint8Array::from(script_buf.to_bytes().as_slice())
+        let buffer = js_sys::Uint8Array::from(script_buf.to_bytes().as_slice());
+        encode_hex(buffer)
     }
 
     #[wasm_bindgen]
