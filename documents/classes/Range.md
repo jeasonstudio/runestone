@@ -21,11 +21,22 @@
 
 ### constructor
 
-• **new Range**(): [`Range`](Range.md)
+• **new Range**(`start?`, `end?`): [`Range`](Range.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `start?` | `bigint` |
+| `end?` | `bigint` |
 
 #### Returns
 
 [`Range`](Range.md)
+
+#### Defined in
+
+index.d.ts:124
 
 ## Properties
 
@@ -35,7 +46,7 @@
 
 #### Defined in
 
-index.d.ts:112
+index.d.ts:127
 
 ___
 
@@ -45,7 +56,7 @@ ___
 
 #### Defined in
 
-index.d.ts:115
+index.d.ts:130
 
 ## Methods
 
@@ -59,4 +70,4 @@ index.d.ts:115
 
 #### Defined in
 
-index.d.ts:109
+index.d.ts:119

@@ -13,11 +13,11 @@
 
 ### txid
 
-• **txid**: `number`[]
+• **txid**: `string`
 
 #### Defined in
 
-index.d.ts:33
+index.d.ts:50
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-index.d.ts:34
+index.d.ts:51

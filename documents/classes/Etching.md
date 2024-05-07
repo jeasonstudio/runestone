@@ -28,13 +28,13 @@
 
 ### constructor
 
-• **new Etching**(`etching?`): [`Etching`](Etching.md)
+• **new Etching**(`spaced_rune`): [`Etching`](Etching.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `etching?` | [`Etching`](Etching.md) |
+| `spaced_rune` | [`SpacedRune`](SpacedRune.md) |
 
 #### Returns
 
@@ -42,27 +42,27 @@
 
 #### Defined in
 
-index.d.ts:75
+index.d.ts:85
 
 ## Properties
 
 ### divisibility
 
-• `Readonly` **divisibility**: `undefined` \| `number`
+• **divisibility**: `number`
 
 #### Defined in
 
-index.d.ts:86
+index.d.ts:96
 
 ___
 
 ### premine
 
-• `Readonly` **premine**: `undefined` \| `bigint`
+• **premine**: `bigint`
 
 #### Defined in
 
-index.d.ts:89
+index.d.ts:99
 
 ___
 
@@ -72,7 +72,7 @@ ___
 
 #### Defined in
 
-index.d.ts:92
+index.d.ts:102
 
 ___
 
@@ -82,37 +82,37 @@ ___
 
 #### Defined in
 
-index.d.ts:95
+index.d.ts:105
 
 ___
 
 ### symbol
 
-• `Readonly` **symbol**: `undefined` \| `string`
+• **symbol**: `string`
 
 #### Defined in
 
-index.d.ts:98
+index.d.ts:108
 
 ___
 
 ### terms
 
-• `Readonly` **terms**: `undefined` \| [`Terms`](Terms.md)
+• **terms**: [`Terms`](Terms.md)
 
 #### Defined in
 
-index.d.ts:101
+index.d.ts:111
 
 ___
 
 ### turbo
 
-• `Readonly` **turbo**: `boolean`
+• **turbo**: `boolean`
 
 #### Defined in
 
-index.d.ts:104
+index.d.ts:114
 
 ## Methods
 
@@ -126,7 +126,7 @@ index.d.ts:104
 
 #### Defined in
 
-index.d.ts:71
+index.d.ts:81
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-index.d.ts:79
+index.d.ts:89
 
 ___
 
@@ -154,4 +154,4 @@ ___
 
 #### Defined in
 
-index.d.ts:83
+index.d.ts:93

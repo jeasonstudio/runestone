@@ -19,17 +19,17 @@
 
 #### Defined in
 
-index.d.ts:20
+index.d.ts:37
 
 ___
 
 ### script\_sig
 
-• **script\_sig**: `number`[]
+• **script\_sig**: `string`
 
 #### Defined in
 
-index.d.ts:21
+index.d.ts:38
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-index.d.ts:22
+index.d.ts:39
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-index.d.ts:23
+index.d.ts:40

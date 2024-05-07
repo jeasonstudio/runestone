@@ -14,11 +14,11 @@
 
 ### content
 
-• **content**: `number`[]
+• **content**: `string`
 
 #### Defined in
 
-index.d.ts:27
+index.d.ts:44
 
 ___
 
@@ -28,7 +28,7 @@ ___
 
 #### Defined in
 
-index.d.ts:29
+index.d.ts:46
 
 ___
 
@@ -38,4 +38,4 @@ ___
 
 #### Defined in
 
-index.d.ts:28
+index.d.ts:45

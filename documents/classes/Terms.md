@@ -24,13 +24,14 @@
 
 ### constructor
 
-• **new Terms**(`terms?`): [`Terms`](Terms.md)
+• **new Terms**(`amount?`, `cap?`): [`Terms`](Terms.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `terms?` | [`Terms`](Terms.md) |
+| `amount?` | `bigint` |
+| `cap?` | `bigint` |
 
 #### Returns
 
@@ -38,7 +39,7 @@
 
 #### Defined in
 
-index.d.ts:288
+index.d.ts:300
 
 ## Properties
 
@@ -48,7 +49,7 @@ index.d.ts:288
 
 #### Defined in
 
-index.d.ts:295
+index.d.ts:307
 
 ___
 
@@ -58,27 +59,27 @@ ___
 
 #### Defined in
 
-index.d.ts:298
+index.d.ts:310
 
 ___
 
 ### height
 
-• `Readonly` **height**: [`Range`](Range.md)
+• **height**: [`Range`](Range.md)
 
 #### Defined in
 
-index.d.ts:301
+index.d.ts:313
 
 ___
 
 ### offset
 
-• `Readonly` **offset**: [`Range`](Range.md)
+• **offset**: [`Range`](Range.md)
 
 #### Defined in
 
-index.d.ts:304
+index.d.ts:316
 
 ## Methods
 
@@ -92,7 +93,7 @@ index.d.ts:304
 
 #### Defined in
 
-index.d.ts:284
+index.d.ts:295
 
 ___
 
@@ -106,4 +107,4 @@ ___
 
 #### Defined in
 
-index.d.ts:292
+index.d.ts:304

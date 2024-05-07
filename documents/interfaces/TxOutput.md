@@ -13,11 +13,11 @@
 
 ### script\_pubkey
 
-• **script\_pubkey**: `number`[]
+• **script\_pubkey**: `string`
 
 #### Defined in
 
-index.d.ts:16
+index.d.ts:33
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-index.d.ts:15
+index.d.ts:32

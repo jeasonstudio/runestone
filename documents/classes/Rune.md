@@ -43,7 +43,7 @@
 
 #### Defined in
 
-index.d.ts:124
+index.d.ts:139
 
 ## Properties
 
@@ -53,7 +53,7 @@ index.d.ts:124
 
 #### Defined in
 
-index.d.ts:169
+index.d.ts:184
 
 ## Methods
 
@@ -67,7 +67,7 @@ index.d.ts:169
 
 #### Defined in
 
-index.d.ts:132
+index.d.ts:147
 
 ___
 
@@ -81,7 +81,7 @@ ___
 
 #### Defined in
 
-index.d.ts:120
+index.d.ts:135
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-index.d.ts:128
+index.d.ts:143
 
 ___
 
@@ -109,7 +109,7 @@ ___
 
 #### Defined in
 
-index.d.ts:144
+index.d.ts:159
 
 ___
 
@@ -123,7 +123,7 @@ ___
 
 #### Defined in
 
-index.d.ts:136
+index.d.ts:151
 
 ___
 
@@ -137,7 +137,7 @@ ___
 
 #### Defined in
 
-index.d.ts:140
+index.d.ts:155
 
 ___
 
@@ -157,7 +157,7 @@ ___
 
 #### Defined in
 
-index.d.ts:149
+index.d.ts:164
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-index.d.ts:166
+index.d.ts:181
 
 ___
 
@@ -198,7 +198,7 @@ ___
 
 #### Defined in
 
-index.d.ts:155
+index.d.ts:170
 
 ___
 
@@ -219,4 +219,4 @@ ___
 
 #### Defined in
 
-index.d.ts:161
+index.d.ts:176

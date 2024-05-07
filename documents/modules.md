@@ -27,6 +27,11 @@
 
 - [Network](modules.md#network)
 
+### Functions
+
+- [decodeHex](modules.md#decodehex)
+- [encodeHex](modules.md#encodehex)
+
 ## Type Aliases
 
 ### Network
@@ -35,4 +40,44 @@
 
 #### Defined in
 
-index.d.ts:11
+index.d.ts:21
+
+## Functions
+
+### decodeHex
+
+▸ **decodeHex**(`s`): `Uint8Array`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `s` | `string` |
+
+#### Returns
+
+`Uint8Array`
+
+#### Defined in
+
+index.d.ts:7
+
+___
+
+### encodeHex
+
+▸ **encodeHex**(`bytes`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `bytes` | `Uint8Array` |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:12

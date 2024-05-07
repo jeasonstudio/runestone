@@ -39,7 +39,7 @@
 
 #### Defined in
 
-index.d.ts:53
+index.d.ts:63
 
 ## Properties
 
@@ -49,7 +49,7 @@ index.d.ts:53
 
 #### Defined in
 
-index.d.ts:60
+index.d.ts:70
 
 ___
 
@@ -59,7 +59,7 @@ ___
 
 #### Defined in
 
-index.d.ts:63
+index.d.ts:73
 
 ___
 
@@ -69,7 +69,7 @@ ___
 
 #### Defined in
 
-index.d.ts:66
+index.d.ts:76
 
 ## Methods
 
@@ -83,7 +83,7 @@ index.d.ts:66
 
 #### Defined in
 
-index.d.ts:47
+index.d.ts:57
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 #### Defined in
 
-index.d.ts:57
+index.d.ts:67

@@ -41,7 +41,7 @@
 
 #### Defined in
 
-index.d.ts:179
+index.d.ts:194
 
 ## Properties
 
@@ -51,7 +51,7 @@ index.d.ts:179
 
 #### Defined in
 
-index.d.ts:206
+index.d.ts:221
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-index.d.ts:209
+index.d.ts:224
 
 ## Methods
 
@@ -81,7 +81,7 @@ index.d.ts:209
 
 #### Defined in
 
-index.d.ts:184
+index.d.ts:199
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-index.d.ts:174
+index.d.ts:189
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-index.d.ts:190
+index.d.ts:205
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-index.d.ts:198
+index.d.ts:213
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-index.d.ts:194
+index.d.ts:209
 
 ___
 
@@ -164,4 +164,4 @@ ___
 
 #### Defined in
 
-index.d.ts:203
+index.d.ts:218

@@ -27,16 +27,7 @@
 
 ### constructor
 
-• **new Runestone**(`edicts`, `etching?`, `mint?`, `pointer?`): [`Runestone`](Runestone.md)
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `edicts` | [`Edict`](Edict.md)[] |
-| `etching?` | [`Etching`](Etching.md) |
-| `mint?` | [`RuneId`](RuneId.md) |
-| `pointer?` | `number` |
+• **new Runestone**(): [`Runestone`](Runestone.md)
 
 #### Returns
 
@@ -44,7 +35,7 @@
 
 #### Defined in
 
-index.d.ts:221
+index.d.ts:232
 
 ## Properties
 
@@ -54,9 +45,9 @@ index.d.ts:221
 
 #### Defined in
 
-index.d.ts:38
+index.d.ts:14
 
-index.d.ts:241
+index.d.ts:252
 
 ___
 
@@ -66,9 +57,9 @@ ___
 
 #### Defined in
 
-index.d.ts:39
+index.d.ts:15
 
-index.d.ts:244
+index.d.ts:255
 
 ___
 
@@ -78,9 +69,9 @@ ___
 
 #### Defined in
 
-index.d.ts:40
+index.d.ts:16
 
-index.d.ts:247
+index.d.ts:258
 
 ___
 
@@ -90,23 +81,23 @@ ___
 
 #### Defined in
 
-index.d.ts:41
+index.d.ts:17
 
-index.d.ts:250
+index.d.ts:261
 
 ## Methods
 
 ### encipher
 
-▸ **encipher**(): `Uint8Array`
+▸ **encipher**(): `string`
 
 #### Returns
 
-`Uint8Array`
+`string`
 
 #### Defined in
 
-index.d.ts:225
+index.d.ts:236
 
 ___
 
@@ -120,7 +111,7 @@ ___
 
 #### Defined in
 
-index.d.ts:214
+index.d.ts:229
 
 ___
 
@@ -134,7 +125,7 @@ ___
 
 #### Defined in
 
-index.d.ts:234
+index.d.ts:245
 
 ___
 
@@ -148,7 +139,7 @@ ___
 
 #### Defined in
 
-index.d.ts:238
+index.d.ts:249
 
 ___
 
@@ -168,4 +159,4 @@ ___
 
 #### Defined in
 
-index.d.ts:230
+index.d.ts:241

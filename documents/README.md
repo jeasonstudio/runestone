@@ -51,118 +51,91 @@ $ npm install @ordjs/runestone
 
 ### Runestone
 
-```javascript
-import { Runestone } from '@ordjs/runestone';
-const fromHexString = (hexString) =>
-  Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
+Rune protocol messages, called runestones, are stored in Bitcoin transaction outputs.
 
-const toHexString = (bytes) =>
-  bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
+#### Decipher Runestones
 
-// decipher
+```typescript
+import { Runestone, Transaction } from '@ordjs/runestone';
+
 // See https://mempool.space/tx/2bb85f4b004be6da54f766c17c1e855187327112c231ef2ff35ebad0ea67c69e
-const tx = {
+const tx: Transaction = {
   output: [{
     // // OP_RETURN OP_PUSHNUM_13 ...
-    script_pubkey: fromHexString('6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601'),
+    script_pubkey: '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601',
     value: 0,
   }],
 };
+
 const runestone = Runestone.decipher(tx);
-console.log(JSON.stringify(runestone.toString()));
-/*
-{
-  "edicts": [],
-  "etching": {
-    "divisibility": 2,
-    "premine": 11000000000,
-    "rune": {
-      "value": 67090369340599845000
-    },
-    "spacers": 7967,
-    "symbol": "ᚠ",
-    "terms": {
-      "amount": 100,
-      "cap": 1111111,
-      "height": {
-        "start": null,
-        "end": null
-      },
-      "offset": {
-        "start": null,
-        "end": null
-      }
-    },
-    "turbo": true
-  },
-  "mint": null,
-  "pointer": null
-}
-*/
-
-// encipher
-console.log(toHexString(runestone.encipher()));
-// 6a5d21020704b5e1d8e1c8eeb788a3070102039f3e05a02d0680dc9afd280a6408c7e843
+// runestone.divisibility => 2
+// runestone.premine => 11000000000
+// runestone.symbol => ᚠ
+// runestone.terms.amount => 100
 ```
 
-### Rune ID
+#### Encipher Runestones
 
-```javascript
-import { RuneId } from '@ordjs/runestone';
+To deploy a new rune ticker, this will require a commitment in an input script.
 
-const runeId = new RuneId(840000n, 1);
+```typescript
+import { Runestone, Etching, SpacedRune, Terms } from '@ordjs/runestone';
 
-console.log('runeId:', runeId.toString(), runeId.block, runeId.tx); // 840000:1 840000n 1
-console.log('delta:', runeId.delta(new RuneId(840001n, 10000)).start); // 1n
-console.log('next:', runeId.next(1n, 1).toString()); // 840001:1
-console.log(RuneId.fromString('840000:1').toString()); // 840000:1
+const etching = new Etching(SpacedRune.fromString('HI•JEASON'));
+etching.terms = new Terms(69n, 420n);
+etching.divisibility = 0;
+etching.premine = 0n;
+etching.symbol = '$';
+
+const runestone = new Runestone();
+runestone.etching = etching;
+
+console.log(runestone.encipher());
+// 6a5d16020704b7fcb396fa0101000302052406000a4508a403
+// send runestone.encipher() to the blockchain
 ```
 
-### Rune
+To mint `UNCOMMON•GOODS`:
 
-```javascript
-import { Rune } from '@ordjs/runestone';
+```typescript
+import { Runestone, RuneId } from '@ordjs/runestone';
 
-const rune = new Rune(67090369340599840949n);
+const runestone = new Runestone();
+runestone.mint = new RuneId(1n, 0);
 
-console.log('value:', rune.value); // 67090369340599840949n
-console.log('isReserved:', rune.isReserved()); // false
-console.log('name:', rune.toString()); // ZZZZZFEHUZZZZZ
-console.log('commitment:', rune.commitment());
-// Uint8Array(9) [181,  48, 54, 140, 116, 223, 16, 163, 3]
-
-console.log(Rune.firstRuneHeight('main')); // 840000
-console.log(Rune.fromString('ZZZZZFEHUZZZZZ').value); // 67090369340599840949n
+console.log(runestone.encipher());
+// 6a5d0414011400
+// send runestone.encipher() to the blockchain
 ```
 
-### Spaced Rune
+Transfer 10 `UNCOMMON•GOODS` to output 1:
 
-```javascript
-import { SpacedRune, Rune } from '@ordjs/runestone';
+```typescript
+import { Runestone, Edict, RuneId } from '@ordjs/runestone';
 
-const rune = new Rune(67090369340599840949n);
-const spacedRune = new SpacedRune(rune, 7967);
+const edict = new Edict(new RuneId(1n, 0), 10n, 1);
+const runestone = new Runestone();
+runestone.edicts = [edict];
 
-console.log('spaced rune:', spacedRune.toString()); // Z•Z•Z•Z•Z•FEHU•Z•Z•Z•Z•Z
-console.log(
-  'rune value:',
-  SpacedRune.fromString('Z•Z•Z•Z•Z•FEHU•Z•Z•Z•Z•Z').rune.value // 67090369340599840949n
-);
-console.log(
-  'rune spacers:',
-  SpacedRune.fromString('Z•Z•Z•Z•Z•FEHU•Z•Z•Z•Z•Z').spacers // 7967
-);
+console.log(runestone.encipher());
+// 6a5d050001000a01
+// send runestone.encipher() to the blockchain
 ```
 
 ## Use in Browser
 
+We provide the output format of ESM bundles for easy use in browsers directly:
+
 ```html
 <script type="module">
-  import { Rune } from 'https://esm.sh/@ordjs/runestone@latest/bundle';
-  const rune = new Rune(1n);
-  console.log(rune.toString());
+  import { Runestone } from 'https://esm.sh/@ordjs/runestone/bundle';
+
+  const rs = Runestone.decipher({...});
+  console.log(JSON.stringify(rs));
 </script>
 ```
+
+For more usage, please refer to the [examples](/examples/) directory.
 
 ## License
 
