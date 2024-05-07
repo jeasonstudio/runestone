@@ -10,10 +10,10 @@ pub struct Terms {
     cap: Option<u128>,
 
     #[wasm_bindgen(readonly)]
-    pub height: Range,
+    pub height: Option<Range>,
 
     #[wasm_bindgen(readonly)]
-    pub offset: Range,
+    pub offset: Option<Range>,
 
     #[wasm_bindgen(skip)]
     #[serde(skip)]
@@ -23,8 +23,15 @@ pub struct Terms {
 #[wasm_bindgen]
 impl Terms {
     #[wasm_bindgen(constructor)]
-    pub fn new(terms: Option<Terms>) -> Terms {
-        terms.unwrap_or_default()
+    pub fn new(amount: Option<js_sys::BigInt>, cap: Option<js_sys::BigInt>) -> Self {
+        let default_range = Range::default();
+        let source = ordinals::Terms {
+            amount: amount.map(|amount| amount.try_into().unwrap()),
+            cap: cap.map(|cap| cap.try_into().unwrap()),
+            height: (default_range.start, default_range.end),
+            offset: (default_range.start, default_range.end),
+        };
+        Self::from(source)
     }
 
     #[wasm_bindgen(getter)]
@@ -43,6 +50,20 @@ impl Terms {
         }
     }
 
+    #[wasm_bindgen(js_name = "height", setter)]
+    pub fn set_height(&mut self, values: Range) {
+        let height_source = (values.start, values.end);
+        self.source.height = height_source;
+        self.height = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "offset", setter)]
+    pub fn set_offset(&mut self, values: Range) {
+        let offset_source = (values.start, values.end);
+        self.source.offset = offset_source;
+        self.offset = Some(values);
+    }
+
     #[wasm_bindgen(js_name = "toJSON")]
     pub fn to_json_value(&self) -> JsValue {
         JsValue::from_serde(&self).unwrap()
@@ -51,8 +72,8 @@ impl Terms {
 
 impl From<ordinals::Terms> for Terms {
     fn from(source: ordinals::Terms) -> Self {
-        let height = Range::from(source.height);
-        let offset = Range::from(source.offset);
+        let height = Some(Range::from(source.height));
+        let offset = Some(Range::from(source.offset));
         Self {
             amount: source.amount,
             cap: source.cap,

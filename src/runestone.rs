@@ -31,34 +31,9 @@ pub struct Runestone {
 #[wasm_bindgen]
 impl Runestone {
     #[wasm_bindgen(constructor)]
-    pub fn new(
-        edicts: Vec<Edict>,
-        etching: Option<Etching>,
-        mint: Option<RuneId>,
-        pointer: Option<u32>,
-    ) -> Self {
-        let edicts_source = edicts.iter().map(|&edict| edict.source).collect();
-        let etching_source = match etching {
-            Some(etching) => Some(etching.source),
-            None => None,
-        };
-        let mint_source = match mint {
-            Some(mint) => Some(mint.source),
-            None => None,
-        };
-        let source = ordinals::Runestone {
-            edicts: edicts_source,
-            etching: etching_source,
-            mint: mint_source,
-            pointer,
-        };
-        Self {
-            edicts,
-            etching,
-            mint,
-            pointer,
-            source,
-        }
+    pub fn new() -> Self {
+        let default = ordinals::Runestone::default();
+        Self::from(default)
     }
 
     #[wasm_bindgen(js_name = "edicts", getter)]
@@ -156,5 +131,27 @@ impl Runestone {
     #[wasm_bindgen(js_name = "valueOf")]
     pub fn value_of(&self) -> JsValue {
         JsValue::from_serde(&self).unwrap()
+    }
+}
+
+impl From<ordinals::Runestone> for Runestone {
+    fn from(source: ordinals::Runestone) -> Self {
+        Self {
+            edicts: source
+                .edicts
+                .iter()
+                .map(|&edict| Edict::from(edict))
+                .collect(),
+            etching: match source.etching {
+                Some(etching) => Some(Etching::from(etching)),
+                None => None,
+            },
+            mint: match source.mint {
+                Some(mint) => Some(RuneId::from(mint)),
+                None => None,
+            },
+            pointer: source.pointer,
+            source,
+        }
     }
 }

@@ -1,8 +1,7 @@
+use crate::utils::decode_hex_to_bytes;
 use bitcoin::{ScriptBuf, TxOut};
 use serde::{Deserialize, Serialize};
 use tsify::Tsify;
-
-use crate::utils::decode_hex_to_bytes;
 
 #[derive(Default, Serialize, Deserialize, Tsify)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
@@ -15,7 +14,8 @@ pub struct TxOutput {
 
 impl TxOutput {
     pub fn to_source(&self) -> TxOut {
-        let script_pubkey = ScriptBuf::from_bytes(decode_hex_to_bytes(self.script_pubkey.to_owned()));
+        let script_pubkey =
+            ScriptBuf::from_bytes(decode_hex_to_bytes(self.script_pubkey.to_owned()));
         TxOut {
             value: self.value,
             script_pubkey,

@@ -1,6 +1,9 @@
 import {
+  Edict,
   Etching,
+  Range,
   Rune,
+  RuneId,
   Runestone,
   SpacedRune,
   Terms,
@@ -33,7 +36,8 @@ console.log(
     Runestone.decipher({
       output: [
         {
-          script_pubkey: '51206da59bfd6b08756375d62e8e38e55db6edaaf20a12b3e6e7f3aa36afcfc3c931',
+          script_pubkey:
+            '51206da59bfd6b08756375d62e8e38e55db6edaaf20a12b3e6e7f3aa36afcfc3c931',
           value: 0,
         },
         {
@@ -63,29 +67,15 @@ console.log(
   )
 );
 
-// const spacedRune = SpacedRune.fromString('Z•Z•Z•Z•Z•FEHU•Z•Z•Z•Z•Z');
-// const terms = new Terms({
-//   amount: 420n,
-//   cap: 69n,
-//   offset: {
-//     end: 9001n,
-//   },
-// });
-// Terms.fromJSON({
-//   amount: 420n,
-//   cap: 69n,
-//   offset: {
-//     end: 9001n,
-//   },
-// });
+const rs = new Runestone();
 
-// const etching = new Etching({
-//   rune: spacedRune.rune,
-//   spacers: spacedRune.spacers,
-//   divisibility: 2,
-//   premine: 0,
-//   symbol: '',
-//   terms,
-//   turbo: true,
-// });
-// console.log(etching);
+const terms = new Terms(69n, 420n);
+const etching = new Etching(SpacedRune.fromString('HI•JEASON'));
+etching.premine = 100n;
+etching.terms = terms;
+rs.etching = etching;
+
+const edict = new Edict(new RuneId(840000n, 1), 10000n, 0);
+rs.edicts = [edict];
+console.log(JSON.stringify(rs, null, 2));
+console.log(rs.encipher());

@@ -1,4 +1,5 @@
 use super::rune::*;
+use super::spaced_rune::*;
 use super::terms::*;
 use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
@@ -35,8 +36,17 @@ pub struct Etching {
 #[wasm_bindgen]
 impl Etching {
     #[wasm_bindgen(constructor)]
-    pub fn new(etching: Option<Etching>) -> Etching {
-        etching.unwrap_or_default()
+    pub fn new(spaced_rune: SpacedRune) -> Etching {
+        let source = ordinals::Etching {
+            divisibility: None,
+            premine: None,
+            rune: Some(spaced_rune.rune.source),
+            spacers: Some(spaced_rune.spacers),
+            symbol: None,
+            terms: None,
+            turbo: true,
+        };
+        Etching::from(source)
     }
 
     #[wasm_bindgen(getter)]
@@ -45,6 +55,37 @@ impl Etching {
             Some(premine) => Some(js_sys::BigInt::from(premine)),
             None => None,
         }
+    }
+
+    #[wasm_bindgen(js_name = "divisibility", setter)]
+    pub fn set_divisibility(&mut self, values: u8) {
+        self.source.divisibility = Some(values);
+        self.divisibility = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "premine", setter)]
+    pub fn set_premine(&mut self, values: js_sys::BigInt) {
+        let value: u128 = values.try_into().unwrap();
+        self.source.premine = Some(value);
+        self.premine = Some(value);
+    }
+
+    #[wasm_bindgen(js_name = "symbol", setter)]
+    pub fn set_symbol(&mut self, values: char) {
+        self.source.symbol = Some(values);
+        self.symbol = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "terms", setter)]
+    pub fn set_terms(&mut self, values: Terms) {
+        self.source.terms = Some(values.source);
+        self.terms = Some(values);
+    }
+
+    #[wasm_bindgen(js_name = "turbo", setter)]
+    pub fn set_turbo(&mut self, values: bool) {
+        self.source.turbo = values;
+        self.turbo = values;
     }
 
     #[wasm_bindgen]
