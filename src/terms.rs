@@ -51,8 +51,8 @@ impl Terms {
 
 impl From<ordinals::Terms> for Terms {
     fn from(source: ordinals::Terms) -> Self {
-        let height = create_range_from_tuple(source.height);
-        let offset = create_range_from_tuple(source.offset);
+        let height = Range::from(source.height);
+        let offset = Range::from(source.offset);
         Self {
             amount: source.amount,
             cap: source.cap,

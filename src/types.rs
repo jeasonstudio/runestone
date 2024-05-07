@@ -8,10 +8,20 @@ pub struct Range {
     pub end: Option<u64>,
 }
 
-pub fn create_range_from_tuple(t: (Option<u64>, Option<u64>)) -> Range {
-    Range {
-        start: t.0,
-        end: t.1,
+#[wasm_bindgen]
+impl Range {
+    #[wasm_bindgen(constructor)]
+    pub fn new(start: Option<u64>, end: Option<u64>) -> Self {
+        Self { start, end }
+    }
+}
+
+impl From<(Option<u64>, Option<u64>)> for Range {
+    fn from(source: (Option<u64>, Option<u64>)) -> Self {
+        Self {
+            start: source.0,
+            end: source.1,
+        }
     }
 }
 

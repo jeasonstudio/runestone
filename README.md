@@ -51,18 +51,13 @@ $ npm install @ordjs/runestone
 
 ```javascript
 import { Runestone } from '@ordjs/runestone';
-const fromHexString = (hexString) =>
-  Uint8Array.from(hexString.match(/.{1,2}/g).map((byte) => parseInt(byte, 16)));
-
-const toHexString = (bytes) =>
-  bytes.reduce((str, byte) => str + byte.toString(16).padStart(2, '0'), '');
 
 // decipher
 // See https://mempool.space/tx/2bb85f4b004be6da54f766c17c1e855187327112c231ef2ff35ebad0ea67c69e
 const tx = {
   output: [{
     // // OP_RETURN OP_PUSHNUM_13 ...
-    script_pubkey: fromHexString('6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601'),
+    script_pubkey: '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601',
     value: 0,
   }],
 };
@@ -100,7 +95,7 @@ console.log(JSON.stringify(runestone.toString()));
 
 
 // encipher
-console.log(toHexString(runestone.encipher()));
+console.log(runestone.encipher());
 // 6a5d21020704b5e1d8e1c8eeb788a3070102039f3e05a02d0680dc9afd280a6408c7e843
 ```
 
