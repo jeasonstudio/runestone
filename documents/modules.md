@@ -40,7 +40,7 @@
 
 #### Defined in
 
-index.d.ts:21
+index.d.ts:28
 
 ## Functions
 

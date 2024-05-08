@@ -60,7 +60,7 @@ import { Runestone, Transaction } from '@ordjs/runestone';
 const tx: Transaction = {
   output: [{
     // // OP_RETURN OP_PUSHNUM_13 ...
-    script_pubkey: '6a5d1f02010480bbb180c5ddf4ede90303a40805b5e9070680809dd085bedd031601',
+    script_pubkey: '6a5d21020704b5e1d8e1c8eeb788a30705a02d039f3e01020680dc9afd2808c7e8430a64',
     value: 0,
   }],
 };
