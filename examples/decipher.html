@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Decipher Runes</title>
+    <style>
+      #input {
+        width: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Please input the transaction hash</h1>
+    <input id="input" />
+    <button onclick="decipher()">decipher message</button>
+    <h1>Results</h1>
+    <div id="content"></div>
+  </body>
+  <script type="module">
+    import { Runestone } from "https://esm.sh/@ordjs/runestone/bundle";
+
+    async function getTx(txid) {
+      const tx = await fetch(`https://mempool.space/api/tx/${txid}`).then(
+        (res) => res.json()
+      );
+      return tx;
+    }
+
+    function getOutputTx(tx) {
+      const output = tx.vout.map((o) =>
+        replacePropertyName(o, "scriptpubkey", "script_pubkey")
+      );
+      return {
+        output,
+      };
+    }
+
+    function replacePropertyName(obj, oldName, newName) {
+      if (!obj.hasOwnProperty(oldName)) return;
+      let newObj = { ...obj };
+      newObj[newName] = newObj[oldName];
+      delete newObj[oldName];
+      return newObj;
+    }
+
+    async function decipher() {
+      document.getElementById("content").innerText = "waiting...";
+      const txid = document.getElementById("input").value;
+      const tx = await getTx(txid);
+      const outputTx = getOutputTx(tx);
+      try {
+        const runestone = Runestone.decipher(outputTx);
+        document.getElementById("content").innerText =
+          JSON.stringify(runestone);
+      } catch {
+        document.getElementById("content").innerText = "error";
+      }
+    }
+
+    window.decipher = decipher;
+  </script>
+</html>
