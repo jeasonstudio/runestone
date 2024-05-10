@@ -39,9 +39,13 @@
     "runestone/*.wasm",
     "runestone/*.js",
     "runestone/*.d.ts",
+    "runestone/cjs/*.wasm",
+    "runestone/cjs/*.js",
+    "runestone/cjs/*.d.ts",
     "examples",
     "documents"
   ],
+  "sideEffects": false,
   "author": "jeason.eth <me@cowpoke.cc>",
   "license": "MIT",
   "bugs": {
