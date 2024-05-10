@@ -1,6 +1,6 @@
 {
   "name": "@ordjs/runestone",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Ordinals runestone javascript implementation",
   "type": "module",
   "scripts": {
