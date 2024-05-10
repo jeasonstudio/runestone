@@ -1,5 +1,6 @@
 pub mod edict;
 pub mod etching;
+pub mod ord;
 pub mod rune;
 pub mod rune_id;
 pub mod runestone;
@@ -8,4 +9,3 @@ pub mod terms;
 pub mod transaction;
 pub mod types;
 pub mod utils;
-pub mod tt;
