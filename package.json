@@ -6,7 +6,9 @@
   "scripts": {
     "prepublishOnly": "npm run build",
     "test": "node --experimental-wasm-modules --no-warnings",
-    "build:rust": "wasm-pack build --scope ordjs --out-dir runestone --target bundler --no-pack --out-name index",
+    "build:rust:bundler": "wasm-pack build --out-dir runestone --target bundler --no-pack --out-name index",
+    "build:rust:nodejs": "wasm-pack build --out-dir runestone/cjs --target nodejs --no-pack --out-name index",
+    "build:rust": "npm run build:rust:bundler && npm run build:rust:nodejs",
     "build:bundle": "node build.js",
     "build:doc": "typedoc --plugin typedoc-plugin-markdown --out documents runestone/index.d.ts",
     "build": "npm run build:rust && pnpm run build:bundle && pnpm run build:doc"
@@ -18,10 +20,12 @@
   "exports": {
     ".": {
       "import": "./runestone/index.js",
+      "require": "./runestone/cjs/index.js",
       "types": "./runestone/index.d.ts"
     },
     "./bundle": {
       "import": "./runestone/bundle.js",
+      "require": "./runestone/cjs/bundle.js",
       "types": "./runestone/index.d.ts"
     }
   },
