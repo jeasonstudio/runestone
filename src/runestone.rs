@@ -1,7 +1,7 @@
 use super::edict::*;
 use super::etching::*;
 use super::rune_id::*;
-use super::transaction::tx::Transaction;
+use super::transaction::Transaction;
 use super::utils::*;
 use gloo_utils::format::JsValueSerdeExt;
 use serde::{Deserialize, Serialize};
@@ -83,7 +83,7 @@ impl Runestone {
             Ok(transaction) => transaction,
             Err(_) => throw_str("Cenotaph: cannot parse transaction from JS value."),
         };
-        let bitcoin_tx = transaction.to_source();
+        let bitcoin_tx = bitcoin::Transaction::from(transaction);
         let artifact = ordinals::Runestone::decipher(&bitcoin_tx).unwrap();
         match artifact {
             ordinals::Artifact::Cenotaph(cenotaph) => {
