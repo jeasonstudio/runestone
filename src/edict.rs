@@ -1,50 +1,47 @@
-use super::rune_id::*;
-use gloo_utils::format::JsValueSerdeExt;
-use serde::{Deserialize, Serialize};
-use wasm_bindgen::prelude::*;
+use super::*;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
 #[wasm_bindgen]
 pub struct Edict {
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub id: RuneId,
 
     amount: u128,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub output: u32,
-
-    #[wasm_bindgen(skip)]
-    #[serde(skip)]
-    pub source: ordinals::Edict,
 }
 
 #[wasm_bindgen]
 impl Edict {
     #[wasm_bindgen(constructor)]
-    pub fn new(id: RuneId, amount: js_sys::BigInt, output: u32) -> Self {
+    pub fn new(id: RuneId, amount: js_sys::BigInt, output: Option<u32>) -> Self {
         let amount: u128 = amount.try_into().unwrap();
-        let source = ordinals::Edict {
-            id: id.source,
-            amount,
-            output,
+        let output = match output {
+            Some(output) => output,
+            None => 0,
         };
-        Self {
-            id,
-            output,
-            amount,
-            source,
-        }
+        Self { id, output, amount }
     }
 
-    #[wasm_bindgen(getter)]
-    pub fn amount(&self) -> js_sys::BigInt {
-        js_sys::BigInt::from(self.source.amount)
+    fn source(&self) -> ordinals::Edict {
+        ordinals::Edict::from(self.clone())
+    }
+
+    #[wasm_bindgen(getter, js_name = "amount")]
+    pub fn get_amount(&self) -> js_sys::BigInt {
+        js_sys::BigInt::from(self.amount)
+    }
+
+    #[wasm_bindgen(setter, js_name = "amount")]
+    pub fn set_amount(&mut self, new_amount: js_sys::BigInt) {
+        let new_amount: u128 = new_amount.try_into().unwrap();
+        self.amount = new_amount;
     }
 
     #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> JsValue {
-        JsValue::from_serde(&self).unwrap()
+    pub fn to_json_value(&self) -> Result<JsValue, Error> {
+        serde_wasm_bindgen::to_value(&self)
     }
 }
 
@@ -54,7 +51,16 @@ impl From<ordinals::Edict> for Edict {
             id: RuneId::from(source.id),
             output: source.output,
             amount: source.amount,
-            source,
+        }
+    }
+}
+
+impl From<Edict> for ordinals::Edict {
+    fn from(source: Edict) -> Self {
+        ordinals::Edict {
+            id: ordinals::RuneId::from(source.id),
+            output: source.output,
+            amount: source.amount,
         }
     }
 }

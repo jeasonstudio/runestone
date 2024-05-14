@@ -1,5 +1,5 @@
+use super::*;
 use std::fmt::Write;
-use wasm_bindgen::prelude::*;
 
 pub fn decode_hex_to_bytes(s: String) -> Vec<u8> {
     (0..s.len())

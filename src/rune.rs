@@ -1,59 +1,57 @@
-use super::types::*;
-use gloo_utils::format::JsValueSerdeExt;
-use serde::{Deserialize, Serialize};
+use super::*;
 use std::str::FromStr;
-use wasm_bindgen::prelude::*;
 
 #[derive(Serialize, Deserialize, Default, Copy, Clone)]
 #[wasm_bindgen]
-pub struct Rune {
-    value: u128,
-
-    #[wasm_bindgen(skip)]
-    #[serde(skip)]
-    pub source: ordinals::Rune,
-}
+pub struct Rune(u128);
 
 #[wasm_bindgen]
 impl Rune {
     #[wasm_bindgen(constructor)]
-    pub fn new(value: js_sys::BigInt) -> Rune {
+    pub fn new(value: js_sys::BigInt) -> Self {
         let rune_value: u128 = value.try_into().unwrap();
-        let source = ordinals::Rune(rune_value);
-        Rune {
-            value: rune_value,
-            source,
-        }
+        Self(rune_value)
     }
 
-    #[wasm_bindgen(getter)]
-    pub fn value(&self) -> js_sys::BigInt {
-        self.source.0.into()
+    fn source(&self) -> ordinals::Rune {
+        ordinals::Rune::from(self.clone())
+    }
+
+    #[wasm_bindgen(getter, js_name = "value")]
+    pub fn get_value(&self) -> js_sys::BigInt {
+        js_sys::BigInt::from(self.0)
+    }
+
+    #[wasm_bindgen(setter, js_name = "value")]
+    pub fn set_value(&mut self, new_value: js_sys::BigInt) {
+        let rune_value: u128 = new_value.try_into().unwrap();
+        self.0 = rune_value;
     }
 
     #[wasm_bindgen(js_name = "isReserved")]
     pub fn is_reserved(&self) -> bool {
-        self.source.is_reserved()
+        self.source().is_reserved()
     }
 
     #[wasm_bindgen]
-    pub fn commitment(&self) -> Vec<u8> {
-        self.source.commitment()
+    pub fn commitment(&self) -> String {
+        let commit = self.source().commitment();
+        encode_bytes_to_hex(commit)
     }
 
     #[wasm_bindgen(js_name = "toString")]
     pub fn to_string(&self) -> String {
-        self.source.to_string()
+        self.source().to_string()
     }
 
     #[wasm_bindgen(js_name = "valueOf")]
     pub fn value_of(&self) -> js_sys::BigInt {
-        self.source.0.into()
+        js_sys::BigInt::from(self.0)
     }
 
     #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> JsValue {
-        JsValue::from_serde(&self).unwrap()
+    pub fn to_json_value(&self) -> Result<JsValue, Error> {
+        serde_wasm_bindgen::to_value(&self)
     }
 
     // static
@@ -86,11 +84,32 @@ impl Rune {
     }
 }
 
+impl From<u128> for Rune {
+    fn from(value: u128) -> Self {
+        Self(value)
+    }
+}
+
+impl From<js_sys::BigInt> for Rune {
+    fn from(value: js_sys::BigInt) -> Self {
+        Self(value.try_into().unwrap())
+    }
+}
+
+impl From<SpacedRune> for Rune {
+    fn from(source: SpacedRune) -> Self {
+        Self(source.rune.0)
+    }
+}
+
 impl From<ordinals::Rune> for Rune {
     fn from(source: ordinals::Rune) -> Self {
-        Self {
-            source,
-            value: source.0,
-        }
+        Self(source.0)
+    }
+}
+
+impl From<Rune> for ordinals::Rune {
+    fn from(source: Rune) -> Self {
+        ordinals::Rune(source.0)
     }
 }

@@ -22,60 +22,55 @@ const tx = {
       value: 0,
     },
   ],
-  // input: [],
 };
 
 const runestone = Runestone.decipher(tx);
 
-console.log('runestone etching:', JSON.stringify(runestone, null, 2));
+console.log('runestone etching:', runestone.toJSON());
 console.log(runestone.encipher());
 
 console.log(
   'runestone mint:',
-  JSON.stringify(
-    Runestone.decipher({
-      output: [
-        {
-          script_pubkey:
-            '51206da59bfd6b08756375d62e8e38e55db6edaaf20a12b3e6e7f3aa36afcfc3c931',
-          value: 0,
-        },
-        {
-          script_pubkey: '6a5d0914f8a83314f0031600',
-          value: 0,
-        },
-      ],
-    }),
-    null,
-    2
-  )
+  Runestone.decipher({
+    output: [
+      {
+        script_pubkey:
+          '51206da59bfd6b08756375d62e8e38e55db6edaaf20a12b3e6e7f3aa36afcfc3c931',
+        value: 0,
+      },
+      {
+        script_pubkey: '6a5d0914f8a83314f0031600',
+        value: 0,
+      },
+    ],
+  }).toJSON()
 );
 
 console.log(
   'runestone edicts:',
-  JSON.stringify(
-    Runestone.decipher({
-      output: [
-        {
-          script_pubkey: '6a5d0800c0a23301d00f00',
-          value: 0,
-        },
-      ],
-    }),
-    null,
-    2
-  )
+  Runestone.decipher({
+    output: [
+      {
+        script_pubkey: '6a5d0800c0a23301d00f00',
+        value: 0,
+      },
+    ],
+  }).toJSON()
 );
 
-const rs = new Runestone();
-
-const terms = new Terms(69n, 420n);
-const etching = new Etching(SpacedRune.fromString('HI•JEASON'));
-etching.premine = 100n;
-etching.terms = terms;
-rs.etching = etching;
+const spacedRune = SpacedRune.fromString('HI•JEASON');
+const etching = new Etching({
+  rune: 1n,
+  spacers: 2,
+  premine: 100n,
+  // terms: new Terms({ amount: 69n, cap: 420n }),
+});
+const rs = new Runestone({
+  etching,
+});
+console.log(rs.toJSON());
 
 const edict = new Edict(new RuneId(840000n, 1), 10000n, 0);
 rs.edicts = [edict];
-console.log(JSON.stringify(rs, null, 2));
+console.log(rs.toJSON());
 console.log(rs.encipher());

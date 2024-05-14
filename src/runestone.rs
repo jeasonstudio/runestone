@@ -1,39 +1,42 @@
-use super::edict::*;
-use super::etching::*;
-use super::rune_id::*;
-use super::transaction::Transaction;
-use super::utils::*;
-use gloo_utils::format::JsValueSerdeExt;
-use serde::{Deserialize, Serialize};
-use tsify::Tsify;
-use wasm_bindgen::prelude::*;
+use super::*;
 use wasm_bindgen::throw_str;
 
-#[derive(Default, Deserialize, Serialize, Tsify)]
+#[derive(Default, Serialize, Deserialize, Tsify, Clone)]
+#[tsify(into_wasm_abi, from_wasm_abi)]
+pub struct RunestoneParams {
+    pub edicts: Option<Vec<Edict>>,
+    pub etching: Option<Etching>,
+    pub mint: Option<RuneId>,
+    pub pointer: Option<u32>,
+}
+
+#[derive(Default, Deserialize, Serialize, Clone)]
 #[wasm_bindgen]
 pub struct Runestone {
     edicts: Vec<Edict>,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub etching: Option<Etching>,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub mint: Option<RuneId>,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub pointer: Option<u32>,
-
-    #[wasm_bindgen(skip)]
-    #[serde(skip)]
-    pub source: ordinals::Runestone,
 }
 
 #[wasm_bindgen]
 impl Runestone {
     #[wasm_bindgen(constructor)]
-    pub fn new() -> Self {
-        let default = ordinals::Runestone::default();
-        Self::from(default)
+    pub fn new(params: Option<RunestoneParams>) -> Self {
+        match params {
+            None => Self::default(),
+            Some(params) => Self::from(params),
+        }
+    }
+
+    fn source(&self) -> ordinals::Runestone {
+        ordinals::Runestone::from(self.clone())
     }
 
     #[wasm_bindgen(js_name = "edicts", getter)]
@@ -47,34 +50,13 @@ impl Runestone {
 
     #[wasm_bindgen(js_name = "edicts", setter)]
     pub fn set_edicts(&mut self, values: Vec<Edict>) {
-        let edicts_source = values.iter().map(|&edict| edict.source).collect();
-        self.source.edicts = edicts_source;
         self.edicts = values;
-    }
-
-    #[wasm_bindgen(js_name = "etching", setter)]
-    pub fn set_etching(&mut self, values: Etching) {
-        self.source.etching = Some(values.source);
-        self.etching = Some(values);
-    }
-
-    #[wasm_bindgen(js_name = "mint", setter)]
-    pub fn set_mint(&mut self, values: RuneId) {
-        self.source.mint = Some(values.source);
-        self.mint = Some(values);
-    }
-
-    #[wasm_bindgen(js_name = "pointer", setter)]
-    pub fn set_pointer(&mut self, values: u32) {
-        self.source.pointer = Some(values);
-        self.pointer = Some(values);
     }
 
     #[wasm_bindgen]
     pub fn encipher(&self) -> String {
-        let script_buf = self.source.encipher();
-        let buffer = js_sys::Uint8Array::from(script_buf.to_bytes().as_slice());
-        encode_hex(buffer)
+        let script_buf = self.source().encipher();
+        script_buf.to_hex_string()
     }
 
     #[wasm_bindgen]
@@ -117,20 +99,19 @@ impl Runestone {
                     etching,
                     mint,
                     pointer,
-                    source: runestone,
                 }
             }
         }
     }
 
     #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> JsValue {
-        JsValue::from_serde(&self).unwrap()
+    pub fn to_json_value(&self) -> Result<JsValue, Error> {
+        serde_wasm_bindgen::to_value(&self)
     }
 
     #[wasm_bindgen(js_name = "valueOf")]
-    pub fn value_of(&self) -> JsValue {
-        JsValue::from_serde(&self).unwrap()
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        serde_wasm_bindgen::to_value(&self)
     }
 }
 
@@ -151,7 +132,43 @@ impl From<ordinals::Runestone> for Runestone {
                 None => None,
             },
             pointer: source.pointer,
-            source,
+        }
+    }
+}
+
+impl From<Runestone> for ordinals::Runestone {
+    fn from(source: Runestone) -> Self {
+        ordinals::Runestone {
+            edicts: source
+                .edicts
+                .iter()
+                .map(|&edict| ordinals::Edict::from(edict))
+                .collect(),
+            etching: match source.etching {
+                Some(etching) => Some(ordinals::Etching::from(etching)),
+                None => None,
+            },
+            mint: match source.mint {
+                Some(mint) => Some(ordinals::RuneId::from(mint)),
+                None => None,
+            },
+            pointer: source.pointer,
+        }
+    }
+}
+
+impl From<RunestoneParams> for Runestone {
+    fn from(params: RunestoneParams) -> Self {
+        let edicts = match params.edicts {
+            Some(edicts) => edicts,
+            None => vec![],
+        };
+
+        Self {
+            edicts,
+            etching: params.etching,
+            mint: params.mint,
+            pointer: params.pointer,
         }
     }
 }

@@ -1,12 +1,15 @@
-import { SpacedRune, Terms, Etching } from '../runestone/index.js';
+import { SpacedRune, Terms, Etching, Rune } from '../runestone/index.js';
 
 const spacedRune = SpacedRune.fromString('Z•Z•Z•Z•Z•FEHU•Z•Z•Z•Z•Z');
-const etching = new Etching(spacedRune);
-console.log(JSON.stringify(etching));
-
-etching.terms = new Terms(420n, 2n);
-etching.divisibility = 2;
-etching.premine = 100n;
-etching.symbol = '?';
-etching.turbo = false;
-console.log(JSON.stringify(etching));
+const terms = new Terms({ amount: 420n, cap: 2n });
+console.log(spacedRune.rune);
+const etching = new Etching({
+  rune: spacedRune.rune,
+  spacers: spacedRune.spacers,
+  premine: 100n,
+  terms: new Terms({ amount: 420n, cap: 2n }),
+  divisibility: 2,
+  symbol: '?',
+  turbo: true,
+});
+console.log(etching.toJSON());

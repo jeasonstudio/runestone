@@ -1,7 +1,13 @@
-use super::types::*;
-use gloo_utils::format::JsValueSerdeExt;
-use serde::{Deserialize, Serialize};
-use wasm_bindgen::prelude::*;
+use super::*;
+
+#[derive(Default, Serialize, Deserialize, Tsify, Clone)]
+#[tsify(into_wasm_abi, from_wasm_abi)]
+pub struct TermsParams {
+    pub amount: Option<u128>,
+    pub cap: Option<u128>,
+    pub height: Option<RangeParams>,
+    pub offset: Option<RangeParams>,
+}
 
 #[derive(Serialize, Deserialize, Default, Copy, Clone)]
 #[wasm_bindgen]
@@ -9,64 +15,73 @@ pub struct Terms {
     amount: Option<u128>,
     cap: Option<u128>,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub height: Option<Range>,
 
-    #[wasm_bindgen(readonly)]
+    #[wasm_bindgen]
     pub offset: Option<Range>,
-
-    #[wasm_bindgen(skip)]
-    #[serde(skip)]
-    pub source: ordinals::Terms,
 }
 
 #[wasm_bindgen]
 impl Terms {
     #[wasm_bindgen(constructor)]
-    pub fn new(amount: Option<js_sys::BigInt>, cap: Option<js_sys::BigInt>) -> Self {
-        let default_range = Range::default();
-        let source = ordinals::Terms {
-            amount: amount.map(|amount| amount.try_into().unwrap()),
-            cap: cap.map(|cap| cap.try_into().unwrap()),
-            height: (default_range.start, default_range.end),
-            offset: (default_range.start, default_range.end),
-        };
-        Self::from(source)
+    pub fn new(params: Option<TermsParams>) -> Self {
+        match params {
+            None => Self::default(),
+            Some(params) => Self {
+                amount: params.amount,
+                cap: params.cap,
+                height: match params.height {
+                    Some(height) => Some(Range::new(height.start, height.end)),
+                    None => None,
+                },
+                offset: match params.offset {
+                    Some(offset) => Some(Range::new(offset.start, offset.end)),
+                    None => None,
+                },
+            },
+        }
     }
 
-    #[wasm_bindgen(getter)]
-    pub fn amount(&self) -> Option<js_sys::BigInt> {
-        match self.source.amount {
+    // fn source(&self) -> ordinals::Terms {
+    //     ordinals::Terms::from(self.clone())
+    // }
+
+    #[wasm_bindgen(getter, js_name = "amount")]
+    pub fn get_amount(&self) -> Option<js_sys::BigInt> {
+        match self.amount {
             Some(amount) => Some(js_sys::BigInt::from(amount)),
             None => None,
         }
     }
 
-    #[wasm_bindgen(getter)]
-    pub fn cap(&self) -> Option<js_sys::BigInt> {
-        match self.source.cap {
+    #[wasm_bindgen(setter, js_name = "amount")]
+    pub fn set_amount(&mut self, new_amount: Option<js_sys::BigInt>) {
+        self.amount = match new_amount {
+            Some(amount) => Some(amount.try_into().unwrap()),
+            None => None,
+        };
+    }
+
+    #[wasm_bindgen(getter, js_name = "cap")]
+    pub fn get_cap(&self) -> Option<js_sys::BigInt> {
+        match self.cap {
             Some(cap) => Some(js_sys::BigInt::from(cap)),
             None => None,
         }
     }
 
-    #[wasm_bindgen(js_name = "height", setter)]
-    pub fn set_height(&mut self, values: Range) {
-        let height_source = (values.start, values.end);
-        self.source.height = height_source;
-        self.height = Some(values);
-    }
-
-    #[wasm_bindgen(js_name = "offset", setter)]
-    pub fn set_offset(&mut self, values: Range) {
-        let offset_source = (values.start, values.end);
-        self.source.offset = offset_source;
-        self.offset = Some(values);
+    #[wasm_bindgen(setter, js_name = "cap")]
+    pub fn set_cap(&mut self, new_cap: Option<js_sys::BigInt>) {
+        self.cap = match new_cap {
+            Some(cap) => Some(cap.try_into().unwrap()),
+            None => None,
+        };
     }
 
     #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> JsValue {
-        JsValue::from_serde(&self).unwrap()
+    pub fn to_json_value(&self) -> Result<JsValue, Error> {
+        serde_wasm_bindgen::to_value(&self)
     }
 }
 
@@ -79,7 +94,25 @@ impl From<ordinals::Terms> for Terms {
             cap: source.cap,
             height,
             offset,
-            source,
+        }
+    }
+}
+
+impl From<Terms> for ordinals::Terms {
+    fn from(source: Terms) -> Self {
+        let height = match source.height {
+            Some(height) => (height.start, height.end),
+            None => (None, None),
+        };
+        let offset = match source.offset {
+            Some(offset) => (offset.start, offset.end),
+            None => (None, None),
+        };
+        ordinals::Terms {
+            amount: source.amount,
+            cap: source.cap,
+            height,
+            offset,
         }
     }
 }
