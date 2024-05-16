@@ -2,11 +2,11 @@ use super::*;
 
 #[derive(Default, Serialize, Deserialize, Tsify, Clone)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
+#[serde(rename_all = "camelCase")]
 pub struct EtchingParams {
+    pub spaced_rune: Option<SpacedRune>,
     pub premine: Option<u128>,
     pub divisibility: Option<u8>,
-    pub rune: Option<Rune>, // Rune
-    pub spacers: Option<u32>,
     pub symbol: Option<char>,
     pub terms: Option<Terms>,
     pub turbo: Option<bool>,
@@ -104,8 +104,12 @@ impl From<ordinals::Etching> for Etching {
 
 impl From<EtchingParams> for Etching {
     fn from(params: EtchingParams) -> Self {
-        let rune = match params.rune {
-            Some(rune) => Some(Rune::from(rune)),
+        let rune = match params.spaced_rune {
+            Some(spaced_rune) => Some(Rune::from(spaced_rune)),
+            None => None,
+        };
+        let spacers = match params.spaced_rune {
+            Some(spaced_rune) => Some(spaced_rune.spacers),
             None => None,
         };
         let turbo = match params.turbo {
@@ -116,7 +120,7 @@ impl From<EtchingParams> for Etching {
             divisibility: params.divisibility,
             premine: params.premine,
             rune,
-            spacers: params.spacers,
+            spacers,
             symbol: params.symbol,
             terms: params.terms,
             turbo,

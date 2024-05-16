@@ -63,7 +63,7 @@ const etching = new Etching({
   rune: 1n,
   spacers: 2,
   premine: 100n,
-  // terms: new Terms({ amount: 69n, cap: 420n }),
+  terms: new Terms({ amount: 69n, cap: 420n }),
 });
 const rs = new Runestone({
   etching,

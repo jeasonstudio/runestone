@@ -27,6 +27,11 @@ impl SpacedRune {
         self.source().to_string()
     }
 
+    #[wasm_bindgen(getter, js_name = "runeValue")]
+    pub fn rune_value(&self) -> js_sys::BigInt {
+        self.rune.get_value()
+    }
+
     #[wasm_bindgen(js_name = "toString")]
     pub fn to_string(&self) -> String {
         self.source().to_string()

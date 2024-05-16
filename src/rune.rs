@@ -1,16 +1,17 @@
 use super::*;
-use std::str::FromStr;
+use serde::Serializer;
 
-#[derive(Serialize, Deserialize, Default, Copy, Clone)]
+#[derive(Deserialize, Default, Copy, Clone)]
 #[wasm_bindgen]
-pub struct Rune(u128);
+pub struct Rune {
+    value: u128,
+}
 
 #[wasm_bindgen]
 impl Rune {
     #[wasm_bindgen(constructor)]
     pub fn new(value: js_sys::BigInt) -> Self {
-        let rune_value: u128 = value.try_into().unwrap();
-        Self(rune_value)
+        Self::from(value)
     }
 
     fn source(&self) -> ordinals::Rune {
@@ -19,13 +20,13 @@ impl Rune {
 
     #[wasm_bindgen(getter, js_name = "value")]
     pub fn get_value(&self) -> js_sys::BigInt {
-        js_sys::BigInt::from(self.0)
+        js_sys::BigInt::from(self.value)
     }
 
     #[wasm_bindgen(setter, js_name = "value")]
     pub fn set_value(&mut self, new_value: js_sys::BigInt) {
         let rune_value: u128 = new_value.try_into().unwrap();
-        self.0 = rune_value;
+        self.value = rune_value;
     }
 
     #[wasm_bindgen(js_name = "isReserved")]
@@ -39,14 +40,9 @@ impl Rune {
         encode_bytes_to_hex(commit)
     }
 
-    #[wasm_bindgen(js_name = "toString")]
-    pub fn to_string(&self) -> String {
+    #[wasm_bindgen(getter)]
+    pub fn name(&self) -> String {
         self.source().to_string()
-    }
-
-    #[wasm_bindgen(js_name = "valueOf")]
-    pub fn value_of(&self) -> js_sys::BigInt {
-        js_sys::BigInt::from(self.0)
     }
 
     #[wasm_bindgen(js_name = "toJSON")]
@@ -86,30 +82,49 @@ impl Rune {
 
 impl From<u128> for Rune {
     fn from(value: u128) -> Self {
-        Self(value)
+        Self { value }
+    }
+}
+
+impl From<Rune> for u128 {
+    fn from(rune: Rune) -> u128 {
+        rune.value
     }
 }
 
 impl From<js_sys::BigInt> for Rune {
     fn from(value: js_sys::BigInt) -> Self {
-        Self(value.try_into().unwrap())
+        let rune_result: Result<u128, _> = value.try_into();
+        match rune_result {
+            Ok(value) => Rune::from(value),
+            Err(_) => throw_str("Cannot convert BigInt to Rune"),
+        }
     }
 }
 
 impl From<SpacedRune> for Rune {
     fn from(source: SpacedRune) -> Self {
-        Self(source.rune.0)
+        source.rune.clone()
     }
 }
 
 impl From<ordinals::Rune> for Rune {
     fn from(source: ordinals::Rune) -> Self {
-        Self(source.0)
+        Self { value: source.0 }
     }
 }
 
 impl From<Rune> for ordinals::Rune {
     fn from(source: Rune) -> Self {
-        ordinals::Rune(source.0)
+        ordinals::Rune(source.value)
+    }
+}
+
+impl Serialize for Rune {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: Serializer,
+    {
+        serializer.serialize_u128(self.value)
     }
 }

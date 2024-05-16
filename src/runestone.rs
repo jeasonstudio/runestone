@@ -60,17 +60,16 @@ impl Runestone {
     }
 
     #[wasm_bindgen]
-    pub fn decipher(tx: JsValue) -> Self {
-        let transaction: Transaction = match serde_wasm_bindgen::from_value(tx) {
-            Ok(transaction) => transaction,
-            Err(_) => throw_str("Cenotaph: cannot parse transaction from JS value."),
-        };
+    pub fn decipher(transaction: Transaction) -> Self {
         let bitcoin_tx = bitcoin::Transaction::from(transaction);
-        let artifact = ordinals::Runestone::decipher(&bitcoin_tx).unwrap();
+        let artifact = match ordinals::Runestone::decipher(&bitcoin_tx) {
+            Some(artifact) => artifact,
+            None => throw_str("Cenotaph: unknow error when deciphering transaction"),
+        };
         match artifact {
             ordinals::Artifact::Cenotaph(cenotaph) => {
                 let flaw = cenotaph.flaw.unwrap();
-                throw_str(&format!("Cenotaph: {flaw}"));
+                throw_str(&format!("Cenotaph: {}", flaw));
             }
             ordinals::Artifact::Runestone(runestone) => {
                 let edicts = runestone
@@ -106,11 +105,6 @@ impl Runestone {
 
     #[wasm_bindgen(js_name = "toJSON")]
     pub fn to_json_value(&self) -> Result<JsValue, Error> {
-        serde_wasm_bindgen::to_value(&self)
-    }
-
-    #[wasm_bindgen(js_name = "valueOf")]
-    pub fn value_of(&self) -> Result<JsValue, Error> {
         serde_wasm_bindgen::to_value(&self)
     }
 }

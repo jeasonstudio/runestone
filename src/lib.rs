@@ -5,8 +5,10 @@ use {
     },
     serde::{Deserialize, Serialize},
     serde_wasm_bindgen::Error,
+    std::str::FromStr,
     tsify::Tsify,
     wasm_bindgen::prelude::*,
+    wasm_bindgen::throw_str,
 };
 
 pub mod create_tx;
