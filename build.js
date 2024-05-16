@@ -1,7 +1,7 @@
-import esbuild from 'esbuild';
-import { wasmLoader } from 'esbuild-plugin-wasm';
+const esbuild = require('esbuild');
+const { wasmLoader } = require('esbuild-plugin-wasm');
 
-await Promise.all([
+Promise.all([
   esbuild.build({
     bundle: true,
     entryPoints: ['runestone/index.js'],
@@ -18,6 +18,6 @@ await Promise.all([
     outfile: 'runestone/cjs/bundle.js',
     plugins: [wasmLoader({ mode: 'embedded' })],
   }),
-]);
-
-console.log('Build complete!');
+]).then(() => {
+  console.log('Build complete!');
+});

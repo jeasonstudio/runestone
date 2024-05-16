@@ -19,7 +19,7 @@
 
 #### Defined in
 
-index.d.ts:40
+index.d.ts:49
 
 ___
 
@@ -29,7 +29,7 @@ ___
 
 #### Defined in
 
-index.d.ts:41
+index.d.ts:50
 
 ___
 
@@ -39,7 +39,7 @@ ___
 
 #### Defined in
 
-index.d.ts:42
+index.d.ts:51
 
 ___
 
@@ -49,4 +49,4 @@ ___
 
 #### Defined in
 
-index.d.ts:43
+index.d.ts:52

@@ -20,6 +20,7 @@
 - [next](RuneId.md#next)
 - [toJSON](RuneId.md#tojson)
 - [toString](RuneId.md#tostring)
+- [valueOf](RuneId.md#valueof)
 - [fromString](RuneId.md#fromstring)
 
 ## Constructors
@@ -41,7 +42,7 @@
 
 #### Defined in
 
-index.d.ts:209
+index.d.ts:253
 
 ## Properties
 
@@ -51,7 +52,7 @@ index.d.ts:209
 
 #### Defined in
 
-index.d.ts:236
+index.d.ts:280
 
 ___
 
@@ -61,7 +62,7 @@ ___
 
 #### Defined in
 
-index.d.ts:239
+index.d.ts:283
 
 ## Methods
 
@@ -81,7 +82,7 @@ index.d.ts:239
 
 #### Defined in
 
-index.d.ts:214
+index.d.ts:258
 
 ___
 
@@ -95,7 +96,7 @@ ___
 
 #### Defined in
 
-index.d.ts:204
+index.d.ts:248
 
 ___
 
@@ -116,25 +117,39 @@ ___
 
 #### Defined in
 
-index.d.ts:220
+index.d.ts:264
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
 
 #### Returns
 
-`any`
+`Object`
 
 #### Defined in
 
-index.d.ts:228
+index.d.ts:243
 
 ___
 
 ### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:247
 
 ▸ **toString**(): `string`
 
@@ -144,7 +159,21 @@ ___
 
 #### Defined in
 
-index.d.ts:224
+index.d.ts:268
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+index.d.ts:277
 
 ___
 
@@ -164,4 +193,4 @@ ___
 
 #### Defined in
 
-index.d.ts:233
+index.d.ts:273

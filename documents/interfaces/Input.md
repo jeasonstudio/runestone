@@ -17,7 +17,7 @@
 
 #### Defined in
 
-index.d.ts:36
+index.d.ts:45
 
 ___
 
@@ -27,4 +27,4 @@ ___
 
 #### Defined in
 
-index.d.ts:35
+index.d.ts:44

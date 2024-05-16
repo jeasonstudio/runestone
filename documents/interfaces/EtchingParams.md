@@ -21,7 +21,7 @@
 
 #### Defined in
 
-index.d.ts:68
+index.d.ts:37
 
 ___
 
@@ -31,7 +31,7 @@ ___
 
 #### Defined in
 
-index.d.ts:67
+index.d.ts:36
 
 ___
 
@@ -41,7 +41,7 @@ ___
 
 #### Defined in
 
-index.d.ts:66
+index.d.ts:35
 
 ___
 
@@ -51,7 +51,7 @@ ___
 
 #### Defined in
 
-index.d.ts:69
+index.d.ts:38
 
 ___
 
@@ -61,7 +61,7 @@ ___
 
 #### Defined in
 
-index.d.ts:70
+index.d.ts:39
 
 ___
 
@@ -71,4 +71,4 @@ ___
 
 #### Defined in
 
-index.d.ts:71
+index.d.ts:40

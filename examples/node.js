@@ -1,4 +1,4 @@
-import {
+const {
   Edict,
   Etching,
   Range,
@@ -7,7 +7,7 @@ import {
   Runestone,
   SpacedRune,
   Terms,
-} from '../runestone/index.js';
+} = require('../runestone/cjs');
 
 const tx = {
   output: [
@@ -26,7 +26,7 @@ const tx = {
 
 const runestone = Runestone.decipher(tx);
 
-console.log('runestone etching:', runestone.valueOf());
+console.log('runestone etching:', runestone);
 console.log(runestone.encipher());
 
 console.log(
@@ -43,7 +43,7 @@ console.log(
         value: 0,
       },
     ],
-  }).valueOf()
+  })
 );
 
 console.log(
@@ -55,7 +55,7 @@ console.log(
         value: 0,
       },
     ],
-  }).valueOf()
+  })
 );
 
 const spacedRune = SpacedRune.fromString('HI•JEASON');
@@ -68,9 +68,9 @@ const etching = new Etching({
 const rs = new Runestone({
   etching,
 });
-console.log(rs.valueOf());
+console.log(rs);
 
 const edict = new Edict(new RuneId(840000n, 1), 10000n, 0);
 rs.edicts = [edict];
-console.log(rs.valueOf());
+console.log(rs);
 console.log(rs.encipher());

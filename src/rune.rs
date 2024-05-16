@@ -2,7 +2,7 @@ use super::*;
 use serde::Serializer;
 
 #[derive(Deserialize, Default, Copy, Clone)]
-#[wasm_bindgen]
+#[wasm_bindgen(inspectable)]
 pub struct Rune {
     value: u128,
 }
@@ -45,9 +45,10 @@ impl Rune {
         self.source().to_string()
     }
 
-    #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> Result<JsValue, Error> {
-        serde_wasm_bindgen::to_value(&self)
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        let serializer = serde_wasm_bindgen::Serializer::json_compatible();
+        self.serialize(&serializer)
     }
 
     // static
@@ -125,6 +126,6 @@ impl Serialize for Rune {
     where
         S: Serializer,
     {
-        serializer.serialize_u128(self.value)
+        self.value.serialize(serializer)
     }
 }

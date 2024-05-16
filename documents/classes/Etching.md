@@ -23,6 +23,8 @@
 - [free](Etching.md#free)
 - [supply](Etching.md#supply)
 - [toJSON](Etching.md#tojson)
+- [toString](Etching.md#tostring)
+- [valueOf](Etching.md#valueof)
 
 ## Constructors
 
@@ -42,7 +44,7 @@
 
 #### Defined in
 
-index.d.ts:105
+index.d.ts:121
 
 ## Properties
 
@@ -52,7 +54,7 @@ index.d.ts:105
 
 #### Defined in
 
-index.d.ts:116
+index.d.ts:132
 
 ___
 
@@ -62,7 +64,7 @@ ___
 
 #### Defined in
 
-index.d.ts:119
+index.d.ts:135
 
 ___
 
@@ -72,7 +74,7 @@ ___
 
 #### Defined in
 
-index.d.ts:122
+index.d.ts:138
 
 ___
 
@@ -82,7 +84,7 @@ ___
 
 #### Defined in
 
-index.d.ts:125
+index.d.ts:141
 
 ___
 
@@ -92,7 +94,7 @@ ___
 
 #### Defined in
 
-index.d.ts:128
+index.d.ts:144
 
 ___
 
@@ -102,7 +104,7 @@ ___
 
 #### Defined in
 
-index.d.ts:131
+index.d.ts:147
 
 ___
 
@@ -112,7 +114,7 @@ ___
 
 #### Defined in
 
-index.d.ts:134
+index.d.ts:150
 
 ## Methods
 
@@ -126,7 +128,7 @@ index.d.ts:134
 
 #### Defined in
 
-index.d.ts:101
+index.d.ts:117
 
 ___
 
@@ -140,13 +142,45 @@ ___
 
 #### Defined in
 
-index.d.ts:109
+index.d.ts:125
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+index.d.ts:112
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:116
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
 
 #### Returns
 
@@ -154,4 +188,4 @@ ___
 
 #### Defined in
 
-index.d.ts:113
+index.d.ts:129

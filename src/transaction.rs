@@ -1,6 +1,5 @@
 use super::*;
 use std::fmt;
-use wasm_bindgen::throw_str;
 
 #[derive(Default, Serialize, Deserialize, Tsify, Clone)]
 #[tsify(into_wasm_abi, from_wasm_abi)]

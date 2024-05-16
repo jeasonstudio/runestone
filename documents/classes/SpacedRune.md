@@ -20,6 +20,7 @@
 - [free](SpacedRune.md#free)
 - [toJSON](SpacedRune.md#tojson)
 - [toString](SpacedRune.md#tostring)
+- [valueOf](SpacedRune.md#valueof)
 - [fromString](SpacedRune.md#fromstring)
 
 ## Constructors
@@ -41,7 +42,7 @@
 
 #### Defined in
 
-index.d.ts:283
+index.d.ts:343
 
 ## Properties
 
@@ -51,7 +52,7 @@ index.d.ts:283
 
 #### Defined in
 
-index.d.ts:299
+index.d.ts:355
 
 ___
 
@@ -61,7 +62,7 @@ ___
 
 #### Defined in
 
-index.d.ts:302
+index.d.ts:358
 
 ___
 
@@ -71,7 +72,7 @@ ___
 
 #### Defined in
 
-index.d.ts:305
+index.d.ts:361
 
 ___
 
@@ -81,7 +82,7 @@ ___
 
 #### Defined in
 
-index.d.ts:308
+index.d.ts:364
 
 ## Methods
 
@@ -95,21 +96,23 @@ index.d.ts:308
 
 #### Defined in
 
-index.d.ts:278
+index.d.ts:338
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
 
 #### Returns
 
-`any`
+`Object`
 
 #### Defined in
 
-index.d.ts:291
+index.d.ts:333
 
 ___
 
@@ -117,13 +120,29 @@ ___
 
 ▸ **toString**(): `string`
 
+Return stringified version of self.
+
 #### Returns
 
 `string`
 
 #### Defined in
 
-index.d.ts:287
+index.d.ts:337
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
+
+#### Returns
+
+`any`
+
+#### Defined in
+
+index.d.ts:347
 
 ___
 
@@ -143,4 +162,4 @@ ___
 
 #### Defined in
 
-index.d.ts:296
+index.d.ts:352

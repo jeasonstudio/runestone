@@ -2,10 +2,9 @@
   "name": "@ordjs/runestone",
   "version": "1.5.3",
   "description": "Ordinals runestone javascript implementation",
-  "type": "module",
   "scripts": {
     "prepublishOnly": "npm run build",
-    "test": "node --experimental-wasm-modules --no-warnings",
+    "test": "node --experimental-wasm-modules --no-warnings --experimental-default-type=module",
     "build:rust:bundler": "wasm-pack build --out-dir runestone --target bundler --no-pack --out-name index",
     "build:rust:nodejs": "wasm-pack build --out-dir runestone/cjs --target nodejs --no-pack --out-name index",
     "build:rust": "npm run build:rust:bundler && npm run build:rust:nodejs && rimraf \"./runestone/**/.gitignore\" -g",

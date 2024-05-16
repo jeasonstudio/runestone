@@ -19,6 +19,8 @@
 - [free](Rune.md#free)
 - [isReserved](Rune.md#isreserved)
 - [toJSON](Rune.md#tojson)
+- [toString](Rune.md#tostring)
+- [valueOf](Rune.md#valueof)
 - [firstRuneHeight](Rune.md#firstruneheight)
 - [fromString](Rune.md#fromstring)
 - [minimumAtHeight](Rune.md#minimumatheight)
@@ -42,7 +44,7 @@
 
 #### Defined in
 
-index.d.ts:159
+index.d.ts:195
 
 ## Properties
 
@@ -52,7 +54,7 @@ index.d.ts:159
 
 #### Defined in
 
-index.d.ts:196
+index.d.ts:232
 
 ___
 
@@ -62,7 +64,7 @@ ___
 
 #### Defined in
 
-index.d.ts:199
+index.d.ts:235
 
 ## Methods
 
@@ -76,7 +78,7 @@ index.d.ts:199
 
 #### Defined in
 
-index.d.ts:167
+index.d.ts:203
 
 ___
 
@@ -90,7 +92,7 @@ ___
 
 #### Defined in
 
-index.d.ts:155
+index.d.ts:191
 
 ___
 
@@ -104,13 +106,45 @@ ___
 
 #### Defined in
 
-index.d.ts:163
+index.d.ts:199
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+index.d.ts:186
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:190
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
 
 #### Returns
 
@@ -118,7 +152,7 @@ ___
 
 #### Defined in
 
-index.d.ts:171
+index.d.ts:207
 
 ___
 
@@ -138,7 +172,7 @@ ___
 
 #### Defined in
 
-index.d.ts:176
+index.d.ts:212
 
 ___
 
@@ -158,7 +192,7 @@ ___
 
 #### Defined in
 
-index.d.ts:193
+index.d.ts:229
 
 ___
 
@@ -179,7 +213,7 @@ ___
 
 #### Defined in
 
-index.d.ts:182
+index.d.ts:218
 
 ___
 
@@ -200,4 +234,4 @@ ___
 
 #### Defined in
 
-index.d.ts:188
+index.d.ts:224

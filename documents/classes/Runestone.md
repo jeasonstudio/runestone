@@ -20,6 +20,8 @@
 - [encipher](Runestone.md#encipher)
 - [free](Runestone.md#free)
 - [toJSON](Runestone.md#tojson)
+- [toString](Runestone.md#tostring)
+- [valueOf](Runestone.md#valueof)
 - [decipher](Runestone.md#decipher)
 
 ## Constructors
@@ -40,7 +42,7 @@
 
 #### Defined in
 
-index.d.ts:248
+index.d.ts:300
 
 ## Properties
 
@@ -50,7 +52,7 @@ index.d.ts:248
 
 #### Defined in
 
-index.d.ts:264
+index.d.ts:316
 
 ___
 
@@ -60,7 +62,7 @@ ___
 
 #### Defined in
 
-index.d.ts:267
+index.d.ts:319
 
 ___
 
@@ -70,7 +72,7 @@ ___
 
 #### Defined in
 
-index.d.ts:270
+index.d.ts:322
 
 ___
 
@@ -80,7 +82,7 @@ ___
 
 #### Defined in
 
-index.d.ts:273
+index.d.ts:325
 
 ## Methods
 
@@ -94,7 +96,7 @@ index.d.ts:273
 
 #### Defined in
 
-index.d.ts:252
+index.d.ts:304
 
 ___
 
@@ -108,13 +110,45 @@ ___
 
 #### Defined in
 
-index.d.ts:244
+index.d.ts:296
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+index.d.ts:291
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:295
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
 
 #### Returns
 
@@ -122,7 +156,7 @@ ___
 
 #### Defined in
 
-index.d.ts:261
+index.d.ts:313
 
 ___
 
@@ -142,4 +176,4 @@ ___
 
 #### Defined in
 
-index.d.ts:257
+index.d.ts:309

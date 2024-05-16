@@ -1,7 +1,7 @@
 use super::*;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
-#[wasm_bindgen]
+#[wasm_bindgen(inspectable)]
 pub struct Edict {
     #[wasm_bindgen]
     pub id: RuneId,
@@ -24,9 +24,9 @@ impl Edict {
         Self { id, output, amount }
     }
 
-    fn source(&self) -> ordinals::Edict {
-        ordinals::Edict::from(self.clone())
-    }
+    // fn source(&self) -> ordinals::Edict {
+    //     ordinals::Edict::from(self.clone())
+    // }
 
     #[wasm_bindgen(getter, js_name = "amount")]
     pub fn get_amount(&self) -> js_sys::BigInt {
@@ -39,9 +39,10 @@ impl Edict {
         self.amount = new_amount;
     }
 
-    #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> Result<JsValue, Error> {
-        serde_wasm_bindgen::to_value(&self)
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        let serializer = serde_wasm_bindgen::Serializer::json_compatible();
+        self.serialize(&serializer)
     }
 }
 

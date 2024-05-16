@@ -8,9 +8,9 @@ const etching = new Etching({
   symbol: '?',
   turbo: true,
 });
-console.log(etching.toJSON());
+console.log(etching.valueOf());
 
 etching.rune = new Rune(100n);
 etching.spacers = 1;
 etching.divisibility = 100;
-console.log(etching.toJSON());
+console.dir(etching);

@@ -1,8 +1,7 @@
 use super::*;
-use std::str::FromStr;
 
 #[derive(Serialize, Deserialize, Default, Clone, Copy)]
-#[wasm_bindgen]
+#[wasm_bindgen(inspectable)]
 pub struct RuneId {
     #[wasm_bindgen]
     pub block: u64,
@@ -52,15 +51,16 @@ impl RuneId {
         self.source().to_string()
     }
 
-    #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> Result<JsValue, Error> {
-        serde_wasm_bindgen::to_value(&self)
-    }
-
     #[wasm_bindgen(js_name = "fromString")]
     pub fn from_string(s: &str) -> Result<RuneId, JsValue> {
         let source = ordinals::RuneId::from_str(s).unwrap();
         Ok(Self::from(source))
+    }
+
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        let serializer = serde_wasm_bindgen::Serializer::json_compatible();
+        self.serialize(&serializer)
     }
 }
 

@@ -19,6 +19,8 @@
 
 - [free](Terms.md#free)
 - [toJSON](Terms.md#tojson)
+- [toString](Terms.md#tostring)
+- [valueOf](Terms.md#valueof)
 
 ## Constructors
 
@@ -38,7 +40,7 @@
 
 #### Defined in
 
-index.d.ts:317
+index.d.ts:381
 
 ## Properties
 
@@ -48,7 +50,7 @@ index.d.ts:317
 
 #### Defined in
 
-index.d.ts:324
+index.d.ts:388
 
 ___
 
@@ -58,7 +60,7 @@ ___
 
 #### Defined in
 
-index.d.ts:327
+index.d.ts:391
 
 ___
 
@@ -68,7 +70,7 @@ ___
 
 #### Defined in
 
-index.d.ts:330
+index.d.ts:394
 
 ___
 
@@ -78,7 +80,7 @@ ___
 
 #### Defined in
 
-index.d.ts:333
+index.d.ts:397
 
 ## Methods
 
@@ -92,13 +94,45 @@ index.d.ts:333
 
 #### Defined in
 
-index.d.ts:313
+index.d.ts:377
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+index.d.ts:372
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:376
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
 
 #### Returns
 
@@ -106,4 +140,4 @@ ___
 
 #### Defined in
 
-index.d.ts:321
+index.d.ts:385

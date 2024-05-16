@@ -18,6 +18,8 @@
 
 - [free](Edict.md#free)
 - [toJSON](Edict.md#tojson)
+- [toString](Edict.md#tostring)
+- [valueOf](Edict.md#valueof)
 
 ## Constructors
 
@@ -39,7 +41,7 @@
 
 #### Defined in
 
-index.d.ts:83
+index.d.ts:91
 
 ## Properties
 
@@ -49,7 +51,7 @@ index.d.ts:83
 
 #### Defined in
 
-index.d.ts:90
+index.d.ts:98
 
 ___
 
@@ -59,7 +61,7 @@ ___
 
 #### Defined in
 
-index.d.ts:93
+index.d.ts:101
 
 ___
 
@@ -69,7 +71,7 @@ ___
 
 #### Defined in
 
-index.d.ts:96
+index.d.ts:104
 
 ## Methods
 
@@ -83,13 +85,45 @@ index.d.ts:96
 
 #### Defined in
 
-index.d.ts:77
+index.d.ts:85
 
 ___
 
 ### toJSON
 
-▸ **toJSON**(): `any`
+▸ **toJSON**(): `Object`
+
+* Return copy of self without private attributes.
+
+#### Returns
+
+`Object`
+
+#### Defined in
+
+index.d.ts:80
+
+___
+
+### toString
+
+▸ **toString**(): `string`
+
+Return stringified version of self.
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:84
+
+___
+
+### valueOf
+
+▸ **valueOf**(): `any`
 
 #### Returns
 
@@ -97,4 +131,4 @@ ___
 
 #### Defined in
 
-index.d.ts:87
+index.d.ts:95

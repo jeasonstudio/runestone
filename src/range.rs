@@ -8,7 +8,7 @@ pub struct RangeParams {
 }
 
 #[derive(Default, Serialize, Deserialize, Copy, Clone)]
-#[wasm_bindgen]
+#[wasm_bindgen(inspectable)]
 pub struct Range {
     #[wasm_bindgen]
     pub start: Option<u64>,
@@ -22,6 +22,12 @@ impl Range {
     #[wasm_bindgen(constructor)]
     pub fn new(start: Option<u64>, end: Option<u64>) -> Self {
         Self { start, end }
+    }
+
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        let serializer = serde_wasm_bindgen::Serializer::json_compatible();
+        self.serialize(&serializer)
     }
 }
 

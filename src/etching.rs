@@ -13,7 +13,7 @@ pub struct EtchingParams {
 }
 
 #[derive(Default, Serialize, Deserialize, Copy, Clone)]
-#[wasm_bindgen]
+#[wasm_bindgen(inspectable)]
 pub struct Etching {
     premine: Option<u128>,
 
@@ -74,9 +74,10 @@ impl Etching {
         }
     }
 
-    #[wasm_bindgen(js_name = "toJSON")]
-    pub fn to_json_value(&self) -> Result<JsValue, Error> {
-        serde_wasm_bindgen::to_value(&self)
+    #[wasm_bindgen(js_name = "valueOf")]
+    pub fn value_of(&self) -> Result<JsValue, Error> {
+        let serializer = serde_wasm_bindgen::Serializer::json_compatible();
+        self.serialize(&serializer)
     }
 }
 

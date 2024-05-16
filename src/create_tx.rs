@@ -9,7 +9,6 @@ use bitcoin::{
 };
 use ordinals::SatPoint;
 use std::collections::{BTreeMap, BTreeSet};
-use wasm_bindgen::throw_str;
 
 #[derive(Default, Serialize, Deserialize, Tsify)]
 #[tsify(into_wasm_abi, from_wasm_abi)]
