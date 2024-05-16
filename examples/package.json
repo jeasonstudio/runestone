@@ -1,0 +1,10 @@
+{
+  "name": "runestone-example",
+  "private": true,
+  "scripts": {
+    "start": "node node.js"
+  },
+  "dependencies": {
+    "@ordjs/runestone": "latest"
+  }
+}
