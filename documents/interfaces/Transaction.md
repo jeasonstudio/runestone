@@ -15,38 +15,38 @@
 
 ### input
 
-• **input**: ``null`` \| [`TxInput`](TxInput.md)[]
+• **input**: `undefined` \| [`TxInput`](TxInput.md)[]
 
 #### Defined in
 
-index.d.ts:27
+index.d.ts:61
 
 ___
 
 ### lock\_time
 
-• **lock\_time**: ``null`` \| `number`
+• **lock\_time**: `undefined` \| `number`
 
 #### Defined in
 
-index.d.ts:26
+index.d.ts:60
 
 ___
 
 ### output
 
-• **output**: [`TxOutput`](TxOutput.md)[]
+• **output**: `undefined` \| [`TxOutput`](TxOutput.md)[]
 
 #### Defined in
 
-index.d.ts:28
+index.d.ts:62
 
 ___
 
 ### version
 
-• **version**: ``null`` \| `number`
+• **version**: `undefined` \| `number`
 
 #### Defined in
 
-index.d.ts:25
+index.d.ts:59

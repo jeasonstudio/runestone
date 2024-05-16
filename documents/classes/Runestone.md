@@ -20,14 +20,19 @@
 - [encipher](Runestone.md#encipher)
 - [free](Runestone.md#free)
 - [toJSON](Runestone.md#tojson)
-- [valueOf](Runestone.md#valueof)
 - [decipher](Runestone.md#decipher)
 
 ## Constructors
 
 ### constructor
 
-• **new Runestone**(): [`Runestone`](Runestone.md)
+• **new Runestone**(`params?`): [`Runestone`](Runestone.md)
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `params?` | [`RunestoneParams`](../interfaces/RunestoneParams.md) |
 
 #### Returns
 
@@ -35,7 +40,7 @@
 
 #### Defined in
 
-index.d.ts:232
+index.d.ts:248
 
 ## Properties
 
@@ -45,45 +50,37 @@ index.d.ts:232
 
 #### Defined in
 
-index.d.ts:14
-
-index.d.ts:252
+index.d.ts:264
 
 ___
 
 ### etching
 
-• **etching**: ``null`` \| [`Etching`](Etching.md)
+• `Optional` **etching**: [`Etching`](Etching.md)
 
 #### Defined in
 
-index.d.ts:15
-
-index.d.ts:255
+index.d.ts:267
 
 ___
 
 ### mint
 
-• **mint**: ``null`` \| [`RuneId`](RuneId.md)
+• `Optional` **mint**: [`RuneId`](RuneId.md)
 
 #### Defined in
 
-index.d.ts:16
-
-index.d.ts:258
+index.d.ts:270
 
 ___
 
 ### pointer
 
-• **pointer**: ``null`` \| `number`
+• `Optional` **pointer**: `number`
 
 #### Defined in
 
-index.d.ts:17
-
-index.d.ts:261
+index.d.ts:273
 
 ## Methods
 
@@ -97,7 +94,7 @@ index.d.ts:261
 
 #### Defined in
 
-index.d.ts:236
+index.d.ts:252
 
 ___
 
@@ -111,7 +108,7 @@ ___
 
 #### Defined in
 
-index.d.ts:229
+index.d.ts:244
 
 ___
 
@@ -125,33 +122,19 @@ ___
 
 #### Defined in
 
-index.d.ts:245
-
-___
-
-### valueOf
-
-▸ **valueOf**(): `any`
-
-#### Returns
-
-`any`
-
-#### Defined in
-
-index.d.ts:249
+index.d.ts:261
 
 ___
 
 ### decipher
 
-▸ **decipher**(`tx`): [`Runestone`](Runestone.md)
+▸ **decipher**(`transaction`): [`Runestone`](Runestone.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `tx` | `any` |
+| `transaction` | [`Transaction`](../interfaces/Transaction.md) |
 
 #### Returns
 
@@ -159,4 +142,4 @@ ___
 
 #### Defined in
 
-index.d.ts:241
+index.d.ts:257

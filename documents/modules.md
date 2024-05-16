@@ -17,11 +17,14 @@
 
 ### Interfaces
 
-- [OutPoint](interfaces/OutPoint.md)
+- [EtchingParams](interfaces/EtchingParams.md)
+- [Input](interfaces/Input.md)
+- [RangeParams](interfaces/RangeParams.md)
+- [RunestoneParams](interfaces/RunestoneParams.md)
+- [TermsParams](interfaces/TermsParams.md)
 - [Transaction](interfaces/Transaction.md)
 - [TxInput](interfaces/TxInput.md)
 - [TxOutput](interfaces/TxOutput.md)
-- [Witness](interfaces/Witness.md)
 
 ### Type Aliases
 
@@ -29,6 +32,7 @@
 
 ### Functions
 
+- [create\_tx](modules.md#create_tx)
 - [decodeHex](modules.md#decodehex)
 - [encodeHex](modules.md#encodehex)
 
@@ -40,9 +44,29 @@
 
 #### Defined in
 
-index.d.ts:21
+index.d.ts:31
 
 ## Functions
+
+### create\_tx
+
+▸ **create_tx**(`input`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `input` | [`Input`](interfaces/Input.md) |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+index.d.ts:17
+
+___
 
 ### decodeHex
 

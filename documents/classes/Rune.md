@@ -10,6 +10,7 @@
 
 ### Properties
 
+- [name](Rune.md#name)
 - [value](Rune.md#value)
 
 ### Methods
@@ -18,8 +19,6 @@
 - [free](Rune.md#free)
 - [isReserved](Rune.md#isreserved)
 - [toJSON](Rune.md#tojson)
-- [toString](Rune.md#tostring)
-- [valueOf](Rune.md#valueof)
 - [firstRuneHeight](Rune.md#firstruneheight)
 - [fromString](Rune.md#fromstring)
 - [minimumAtHeight](Rune.md#minimumatheight)
@@ -43,31 +42,41 @@
 
 #### Defined in
 
-index.d.ts:139
+index.d.ts:159
 
 ## Properties
 
-### value
+### name
 
-• `Readonly` **value**: `bigint`
+• `Readonly` **name**: `string`
 
 #### Defined in
 
-index.d.ts:184
+index.d.ts:196
+
+___
+
+### value
+
+• **value**: `bigint`
+
+#### Defined in
+
+index.d.ts:199
 
 ## Methods
 
 ### commitment
 
-▸ **commitment**(): `Uint8Array`
+▸ **commitment**(): `string`
 
 #### Returns
 
-`Uint8Array`
+`string`
 
 #### Defined in
 
-index.d.ts:147
+index.d.ts:167
 
 ___
 
@@ -81,7 +90,7 @@ ___
 
 #### Defined in
 
-index.d.ts:135
+index.d.ts:155
 
 ___
 
@@ -95,7 +104,7 @@ ___
 
 #### Defined in
 
-index.d.ts:143
+index.d.ts:163
 
 ___
 
@@ -109,35 +118,7 @@ ___
 
 #### Defined in
 
-index.d.ts:159
-
-___
-
-### toString
-
-▸ **toString**(): `string`
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-index.d.ts:151
-
-___
-
-### valueOf
-
-▸ **valueOf**(): `bigint`
-
-#### Returns
-
-`bigint`
-
-#### Defined in
-
-index.d.ts:155
+index.d.ts:171
 
 ___
 
@@ -157,7 +138,7 @@ ___
 
 #### Defined in
 
-index.d.ts:164
+index.d.ts:176
 
 ___
 
@@ -177,7 +158,7 @@ ___
 
 #### Defined in
 
-index.d.ts:181
+index.d.ts:193
 
 ___
 
@@ -198,7 +179,7 @@ ___
 
 #### Defined in
 
-index.d.ts:170
+index.d.ts:182
 
 ___
 
@@ -219,4 +200,4 @@ ___
 
 #### Defined in
 
-index.d.ts:176
+index.d.ts:188

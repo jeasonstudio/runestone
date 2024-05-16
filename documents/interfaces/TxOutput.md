@@ -17,14 +17,14 @@
 
 #### Defined in
 
-index.d.ts:33
+index.d.ts:48
 
 ___
 
 ### value
 
-• **value**: `number`
+• **value**: `undefined` \| `number`
 
 #### Defined in
 
-index.d.ts:32
+index.d.ts:47

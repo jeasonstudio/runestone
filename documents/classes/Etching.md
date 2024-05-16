@@ -28,13 +28,13 @@
 
 ### constructor
 
-• **new Etching**(`spaced_rune`): [`Etching`](Etching.md)
+• **new Etching**(`params?`): [`Etching`](Etching.md)
 
 #### Parameters
 
 | Name | Type |
 | :------ | :------ |
-| `spaced_rune` | [`SpacedRune`](SpacedRune.md) |
+| `params?` | [`EtchingParams`](../interfaces/EtchingParams.md) |
 
 #### Returns
 
@@ -42,67 +42,67 @@
 
 #### Defined in
 
-index.d.ts:85
+index.d.ts:105
 
 ## Properties
 
 ### divisibility
 
-• **divisibility**: `number`
+• `Optional` **divisibility**: `number`
 
 #### Defined in
 
-index.d.ts:96
+index.d.ts:116
 
 ___
 
 ### premine
 
-• **premine**: `bigint`
+• `Optional` **premine**: `bigint`
 
 #### Defined in
 
-index.d.ts:99
+index.d.ts:119
 
 ___
 
 ### rune
 
-• `Readonly` **rune**: `undefined` \| [`Rune`](Rune.md)
+• `Optional` **rune**: [`Rune`](Rune.md)
 
 #### Defined in
 
-index.d.ts:102
+index.d.ts:122
 
 ___
 
 ### spacers
 
-• `Readonly` **spacers**: `undefined` \| `number`
+• `Optional` **spacers**: `number`
 
 #### Defined in
 
-index.d.ts:105
+index.d.ts:125
 
 ___
 
 ### symbol
 
-• **symbol**: `string`
+• `Optional` **symbol**: `string`
 
 #### Defined in
 
-index.d.ts:108
+index.d.ts:128
 
 ___
 
 ### terms
 
-• **terms**: [`Terms`](Terms.md)
+• `Optional` **terms**: [`Terms`](Terms.md)
 
 #### Defined in
 
-index.d.ts:111
+index.d.ts:131
 
 ___
 
@@ -112,7 +112,7 @@ ___
 
 #### Defined in
 
-index.d.ts:114
+index.d.ts:134
 
 ## Methods
 
@@ -126,7 +126,7 @@ index.d.ts:114
 
 #### Defined in
 
-index.d.ts:81
+index.d.ts:101
 
 ___
 
@@ -140,7 +140,7 @@ ___
 
 #### Defined in
 
-index.d.ts:89
+index.d.ts:109
 
 ___
 
@@ -154,4 +154,4 @@ ___
 
 #### Defined in
 
-index.d.ts:93
+index.d.ts:113

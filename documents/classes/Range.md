@@ -36,7 +36,7 @@
 
 #### Defined in
 
-index.d.ts:124
+index.d.ts:144
 
 ## Properties
 
@@ -46,7 +46,7 @@ index.d.ts:124
 
 #### Defined in
 
-index.d.ts:127
+index.d.ts:147
 
 ___
 
@@ -56,7 +56,7 @@ ___
 
 #### Defined in
 
-index.d.ts:130
+index.d.ts:150
 
 ## Methods
 
@@ -70,4 +70,4 @@ index.d.ts:130
 
 #### Defined in
 
-index.d.ts:119
+index.d.ts:139

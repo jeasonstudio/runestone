@@ -23,7 +23,7 @@
 
 ### constructor
 
-• **new Edict**(`id`, `amount`, `output`): [`Edict`](Edict.md)
+• **new Edict**(`id`, `amount`, `output?`): [`Edict`](Edict.md)
 
 #### Parameters
 
@@ -31,7 +31,7 @@
 | :------ | :------ |
 | `id` | [`RuneId`](RuneId.md) |
 | `amount` | `bigint` |
-| `output` | `number` |
+| `output?` | `number` |
 
 #### Returns
 
@@ -39,37 +39,37 @@
 
 #### Defined in
 
-index.d.ts:63
+index.d.ts:83
 
 ## Properties
 
 ### amount
 
-• `Readonly` **amount**: `bigint`
+• **amount**: `bigint`
 
 #### Defined in
 
-index.d.ts:70
+index.d.ts:90
 
 ___
 
 ### id
 
-• `Readonly` **id**: [`RuneId`](RuneId.md)
+• **id**: [`RuneId`](RuneId.md)
 
 #### Defined in
 
-index.d.ts:73
+index.d.ts:93
 
 ___
 
 ### output
 
-• `Readonly` **output**: `number`
+• **output**: `number`
 
 #### Defined in
 
-index.d.ts:76
+index.d.ts:96
 
 ## Methods
 
@@ -83,7 +83,7 @@ index.d.ts:76
 
 #### Defined in
 
-index.d.ts:57
+index.d.ts:77
 
 ___
 
@@ -97,4 +97,4 @@ ___
 
 #### Defined in
 
-index.d.ts:67
+index.d.ts:87

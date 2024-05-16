@@ -10,7 +10,9 @@
 
 ### Properties
 
+- [name](SpacedRune.md#name)
 - [rune](SpacedRune.md#rune)
+- [runeValue](SpacedRune.md#runevalue)
 - [spacers](SpacedRune.md#spacers)
 
 ### Methods
@@ -39,27 +41,47 @@
 
 #### Defined in
 
-index.d.ts:271
+index.d.ts:283
 
 ## Properties
 
-### rune
+### name
 
-• `Readonly` **rune**: [`Rune`](Rune.md)
+• `Readonly` **name**: `string`
 
 #### Defined in
 
-index.d.ts:287
+index.d.ts:299
+
+___
+
+### rune
+
+• **rune**: [`Rune`](Rune.md)
+
+#### Defined in
+
+index.d.ts:302
+
+___
+
+### runeValue
+
+• `Readonly` **runeValue**: `bigint`
+
+#### Defined in
+
+index.d.ts:305
 
 ___
 
 ### spacers
 
-• `Readonly` **spacers**: `number`
+• **spacers**: `number`
 
 #### Defined in
 
-index.d.ts:290
+index.d.ts:308
 
 ## Methods
 
@@ -73,7 +95,7 @@ index.d.ts:290
 
 #### Defined in
 
-index.d.ts:266
+index.d.ts:278
 
 ___
 
@@ -87,7 +109,7 @@ ___
 
 #### Defined in
 
-index.d.ts:279
+index.d.ts:291
 
 ___
 
@@ -101,7 +123,7 @@ ___
 
 #### Defined in
 
-index.d.ts:275
+index.d.ts:287
 
 ___
 
@@ -121,4 +143,4 @@ ___
 
 #### Defined in
 
-index.d.ts:284
+index.d.ts:296

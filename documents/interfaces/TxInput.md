@@ -15,38 +15,38 @@
 
 ### previous\_output
 
-• **previous\_output**: [`OutPoint`](OutPoint.md)
+• **previous\_output**: `string`
 
 #### Defined in
 
-index.d.ts:37
+index.d.ts:52
 
 ___
 
 ### script\_sig
 
-• **script\_sig**: `string`
+• **script\_sig**: `undefined` \| `string`
 
 #### Defined in
 
-index.d.ts:38
+index.d.ts:53
 
 ___
 
 ### sequence
 
-• **sequence**: `number`
+• **sequence**: `undefined` \| `number`
 
 #### Defined in
 
-index.d.ts:39
+index.d.ts:54
 
 ___
 
 ### witness
 
-• **witness**: [`Witness`](Witness.md)
+• **witness**: `undefined` \| `string`[]
 
 #### Defined in
 
-index.d.ts:40
+index.d.ts:55

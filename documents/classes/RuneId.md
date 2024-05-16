@@ -41,27 +41,27 @@
 
 #### Defined in
 
-index.d.ts:194
+index.d.ts:209
 
 ## Properties
 
 ### block
 
-• `Readonly` **block**: `bigint`
+• **block**: `bigint`
 
 #### Defined in
 
-index.d.ts:221
+index.d.ts:236
 
 ___
 
 ### tx
 
-• `Readonly` **tx**: `number`
+• **tx**: `number`
 
 #### Defined in
 
-index.d.ts:224
+index.d.ts:239
 
 ## Methods
 
@@ -81,7 +81,7 @@ index.d.ts:224
 
 #### Defined in
 
-index.d.ts:199
+index.d.ts:214
 
 ___
 
@@ -95,7 +95,7 @@ ___
 
 #### Defined in
 
-index.d.ts:189
+index.d.ts:204
 
 ___
 
@@ -116,7 +116,7 @@ ___
 
 #### Defined in
 
-index.d.ts:205
+index.d.ts:220
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-index.d.ts:213
+index.d.ts:228
 
 ___
 
@@ -144,7 +144,7 @@ ___
 
 #### Defined in
 
-index.d.ts:209
+index.d.ts:224
 
 ___
 
@@ -164,4 +164,4 @@ ___
 
 #### Defined in
 
-index.d.ts:218
+index.d.ts:233
