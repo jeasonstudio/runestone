@@ -68,10 +68,10 @@ const tx: Transaction = {
 };
 
 const runestone = Runestone.decipher(tx);
-// runestone.divisibility => 2
-// runestone.premine => 11000000000
-// runestone.symbol => ᚠ
-// runestone.terms.amount => 100
+// runestone.etching.divisibility => 2
+// runestone.etching.premine => 11000000000
+// runestone.etching.symbol => ᚠ
+// runestone.etching.terms.amount => 100
 ```
 
 #### Encipher Runestones
@@ -81,15 +81,15 @@ To deploy a new rune ticker, this will require a commitment in an input script.
 ```typescript
 import { Runestone, Etching, SpacedRune, Terms } from '@ordjs/runestone';
 
-const etching = new Etching(SpacedRune.fromString('HI•JEASON'));
-etching.terms = new Terms(69n, 420n);
-etching.divisibility = 0;
-etching.premine = 0n;
-etching.symbol = '$';
+const etching = new Etching({
+  spacedRune: SpacedRune.fromString('Hi•JEASON'),
+  premine: 0n,
+  terms: new Terms({ amount: 69n, cap: 420n }),
+  divisibility: 0,
+  symbol: '$',
+});
 
-const runestone = new Runestone();
-runestone.etching = etching;
-
+const runestone = new Runestone({ etching });
 console.log(runestone.encipher());
 // 6a5d16020704b7fcb396fa0101000302052406000a4508a403
 // send runestone.encipher() to the blockchain
@@ -100,9 +100,7 @@ To mint `UNCOMMON•GOODS`:
 ```typescript
 import { Runestone, RuneId } from '@ordjs/runestone';
 
-const runestone = new Runestone();
-runestone.mint = new RuneId(1n, 0);
-
+const runestone = new Runestone({ mint: new RuneId(1n, 0) });
 console.log(runestone.encipher());
 // 6a5d0414011400
 // send runestone.encipher() to the blockchain
@@ -114,9 +112,7 @@ Transfer 10 `UNCOMMON•GOODS` to output 1:
 import { Runestone, Edict, RuneId } from '@ordjs/runestone';
 
 const edict = new Edict(new RuneId(1n, 0), 10n, 1);
-const runestone = new Runestone();
-runestone.edicts = [edict];
-
+const runestone = new Runestone({ edicts: [edict] });
 console.log(runestone.encipher());
 // 6a5d050001000a01
 // send runestone.encipher() to the blockchain
@@ -131,7 +127,7 @@ We provide the output format of ESM bundles for easy use in browsers directly:
   import { Runestone } from 'https://esm.sh/@ordjs/runestone/bundle';
 
   const rs = Runestone.decipher({...});
-  console.log(JSON.stringify(rs));
+  // rs.xxx
 </script>
 ```
 

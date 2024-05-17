@@ -60,8 +60,7 @@ console.log(
 
 const spacedRune = SpacedRune.fromString('HI•JEASON');
 const etching = new Etching({
-  rune: 1n,
-  spacers: 2,
+  spacedRune,
   premine: 100n,
   terms: new Terms({ amount: 69n, cap: 420n }),
 });
